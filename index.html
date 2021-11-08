@@ -6,21 +6,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ISSoft Training</title>
-    <link rel="stylesheet" href="style_flex.css">
+    <link rel="stylesheet" href="./styles/style_flex.css">
 </head>
 
 <body>
     <div class="container">
-        <header class="header">header</header>
+
+      <!-- HEADER -->
+        <header class="header">
+            <h1>ISSoft Training</h1>
+            <span class="auth-result"></span>
+            <div class="auth-buttons">
+                <button class="auth-buttons__sign-in" >Sign In Form</button>
+                <button class="auth-buttons__sign-up" >Sign Up Form</button>
+            </div>
+        </header>
+
+        <!-- MODALS -->
+        <div class="modal" id="sign-in-modal">
+          <div class="modal__content">
+            <form action="#" class="auth-form" id="sign-in">
+              <div class="auth-form__header">
+                <h3>Sign In</h3>
+                <button class="close-modal" id="close-sign-in">&times;</button>
+              </div>
+              <div class="auth-form__inputs">
+                <input type="text" class="auth-form__email" placeholder="Enter email" id="sign-in__email"> 
+                <input type="password" class="auth-form__password" placeholder="Enter password" id="sign-in__password">
+              </div>
+              <button type="submit" class="auth-form__submit input">Sign In</button>
+           </form>
+          </div>
+        </div>
+
+        <div class="modal" id="sign-up-modal">
+          <div class="modal__content">
+            <form action="#" class="auth-form" id="sign-up">
+              <div class="auth-form__header">
+                <h3>Sign Up</h3>
+                <button class="close-modal" id="close-sign-up">&times;</button>
+              </div>
+              <div class="auth-form__inputs">
+                <input type="text" class="auth-form__email" placeholder="Enter email" id="sign-up__email">
+                <input type="password" class="auth-form__password" placeholder="Enter password" id="sign-up__password">
+                <input type="password" class="auth-form__password" placeholder="Confirm password" id="sign-up__password-confirmation">
+              </div>
+              <button type="submit" class="auth-form__submit">Sign Up</button>
+           </form>
+          </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
         <main class="content">
-            <div class="column-1">column 1</div>
+            <div class="column-1">Column2</div>
             <div class="column-2">column 2</div>
             <div class="column-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos hic rem culpa nulla beatae asperiores, harum minima quaerat cumque. Impedit, fuga inventore quasi ut nulla minus tempore blanditiis in molestiae iusto recusandae, esse laboriosam consequatur possimus. Praesentium adipisci, accusamus reiciendis aliquid porro delectus repellendus nesciunt ratione earum rem perferendis obcaecati illum voluptatem quod molestiae veniam ipsa unde dolore quisquam corrupti error enim et laborum? Doloribus voluptas vel, debitis iusto officia eveniet. Dolorum maxime ratione itaque eaque cupiditate porro veritatis repudiandae mollitia fugit ab possimus, officia sint. Labore, beatae officiis earum excepturi modi voluptatum, quasi dolore voluptates aliquam neque adipisci molestias?</div>
         </main>
+
+        <!-- FOOTER -->
         <footer class="footer">footer</footer>
     </div>
 
-    <script src="index.js"></script>
+    <script src="./index.js" type="module"></script>
 </body>
+
+
 
 </html>
