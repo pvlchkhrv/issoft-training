@@ -9,6 +9,7 @@ export class SignUpForm extends AuthForm {
 
   validatePasswordConfirmation(password, passwordConfirmation) {
     if (password !== passwordConfirmation) {
+      // create span with error
       const spanPasswordConfirmationError = document.createElement("span");
       spanPasswordConfirmationError.innerText =
         "Check the password confirmation";
@@ -26,14 +27,10 @@ export class SignUpForm extends AuthForm {
       this.validatePassword(password) &&
       this.validatePasswordConfirmation(password, passwordConfirmation)
     ) {
-      debugger;
-      // //create span in header
-      // const header = document.querySelector("header");
-      // const spanEmail = document.createElement("span");
-
       const users = JSON.parse(localStorage.getItem("users"));
       const isRegisteredUser = users.find((user) => user.email === email);
       if (isRegisteredUser) {
+        //create span with error
         const spanEmailError = document.createElement("span");
         spanEmailError.innerText = "Email has been already registered";
         spanEmailError.id = "email-error";
@@ -43,9 +40,7 @@ export class SignUpForm extends AuthForm {
       } else {
         users.push({ email, password });
         localStorage.setItem("users", JSON.stringify(users));
-
-        // spanEmail.innerHTML = "Registered successfuly";
-        // header.insertBefore(spanEmail, header.children[1]);
+        //create span in header to show auth result
         const authResultSpan = document.querySelector(".auth-result");
         authResultSpan.innerText = "Registered successfuly";
         closeModal(signUpModal);

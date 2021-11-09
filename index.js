@@ -35,11 +35,11 @@ signUpCloseButton.addEventListener("click", (e) => {
   closeModal(signUpModal);
 });
 
-//sign in
+// work with forms
 const signInFormElement = document.querySelector("#sign-in");
 const signInEmailInputElement = document.querySelector("#sign-in__email");
 const signInPasswordInputElement = document.querySelector("#sign-in__password");
-//sign up
+
 const signUpFormElement = document.querySelector("#sign-up");
 const signUpEmailInputElement = document.querySelector("#sign-up__email");
 const signUpPasswordInputElement = document.querySelector("#sign-up__password");
