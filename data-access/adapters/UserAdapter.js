@@ -11,14 +11,12 @@ export class UserAdapter {
       return users;
     } else {
       this.setUsers({});
-      this.getUsers();
     }
   }
 
-  setUser(email, user) {
-    debugger;
+  setUser(user) {
     const users = this.getUsers();
-    users[email] = user;
+    users[user.email] = user;
     this.setUsers(users);
   }
 
