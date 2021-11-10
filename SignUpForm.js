@@ -1,49 +1,41 @@
-import { AuthForm } from "./AuthForm.js";
-import { closeModal, signUpModal } from "./index.js";
+import { Form } from "./Form.js";
+import { userStorageAdapter } from "./data-access/adapters/UserAdapter.js";
 
-export class SignUpForm extends AuthForm {
-  constructor(form, email, password, passwordConfirmation) {
-    super(form, email, password);
-    this.passwordConfirmation = passwordConfirmation;
+export class SignUpForm extends Form {
+  constructor(form, emailInput, passwordInput, passwordConfirmationInput) {
+    super(form);
+    this.email = emailInput;
+    this.password = passwordInput;
+    this.passwordConfirmation = passwordConfirmationInput;
   }
 
-  validatePasswordConfirmation(password, passwordConfirmation) {
-    if (password !== passwordConfirmation) {
-      // create span with error
-      const spanPasswordConfirmationError = document.createElement("span");
-      spanPasswordConfirmationError.innerText =
-        "Check the password confirmation";
-      spanPasswordConfirmationError.id = "password-confirmation-error";
-      spanPasswordConfirmationError.style.color = "red";
-      !document.querySelector("#password-confirmation-error") &&
-        this.passwordConfirmation.before(spanPasswordConfirmationError);
+  validatePasswordConfirmation() {
+    if (this.password.value !== this.passwordConfirmation.value) {
+      this.email.nextElementSibling.style.color = "red";
+      this.email.nextElementSibling.innerText = "Confirmation failed";
+      return false;
     }
     return true;
   }
 
-  onSubmit(email, password, passwordConfirmation) {
-    if (
-      this.validateEmail(email) &&
-      this.validatePassword(password) &&
-      this.validatePasswordConfirmation(password, passwordConfirmation)
-    ) {
-      const users = JSON.parse(localStorage.getItem("users"));
-      const isRegisteredUser = users.find((user) => user.email === email);
-      if (isRegisteredUser) {
-        //create span with error
-        const spanEmailError = document.createElement("span");
-        spanEmailError.innerText = "Email has been already registered";
-        spanEmailError.id = "email-error";
-        spanEmailError.style.color = "red";
-        !document.querySelector("#email-error") &&
-          this.email.before(spanEmailError);
-      } else {
-        users.push({ email, password });
-        localStorage.setItem("users", JSON.stringify(users));
-        //create span in header to show auth result
-        const authResultSpan = document.querySelector(".auth-result");
+  submit(e) {
+    debugger;
+    super.submit(e);
+    const authResultSpan = document.querySelector(".auth-result");
+    if (this.validatePasswordConfirmation()) {
+      const user = userStorageAdapter.getUser(this.email.value);
+
+      if (!user) {
+        userStorageAdapter.setUser({
+          email: this.email.value,
+          password: this.password.value,
+        });
+
         authResultSpan.innerText = "Registered successfuly";
-        closeModal(signUpModal);
+      } else {
+        authResultSpan.style.color = "red";
+        authResultSpan.innerText =
+          "User with pointed email has been already registered";
       }
     }
   }

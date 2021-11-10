@@ -118,42 +118,75 @@ input {
   background-color: #fff;
   transform: scale(0.5);
   transition: 0.4s all;
+  position: relative;
 }
 
 .modal__content.active {
   transform: scale(1);
 }
 
+.close-modal {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  border-radius: 100%;
+  font-size: 30px;
+}
+
 /* FORM */
 .auth-form {
-  height: 300px;
+  height: 400px;
   width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  position: relative;
 }
 
-.auth-form__header {
-  display: flex;
-  justify-content: center;
-}
-
-.close-modal {
-  height: 50px;
-  width: 50px;
-  position: absolute;
-  top: -50px;
-  right: -40px;
-  border-radius: 100%;
-  font-size: 30px;
-}
-
-.auth-form__inputs {
-  height: 40%;
-  width: 70%;
+.form__fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  height: 80%;
+}
+
+.form__item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.form__label {
+  font-size: 0.6rem;
+  letter-spacing: 1.2;
+  font-weight: bold;
+  margin-bottom: 4px;
+  user-select: none;
+}
+
+.form__input {
+  /* line-height: 42px; */
+  order: 1;
+}
+.form__input__message {
+  order: 2;
+  font-size: 0.7rem;
+  margin-top: 2px;
+  margin-left: 2px;
+  display: none;
+}
+
+.form__label {
+  order: 0;
+}
+
+.form__item--actions {
+  flex-direction: row;
+  margin: -24px;
+  padding: 24px;
 }
