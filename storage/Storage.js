@@ -4,8 +4,7 @@ class Storage {
   }
 
   getItem(key) {
-    const item = localStorage.getItem(key);
-    return item;
+    return localStorage.getItem(key);
   }
 
   updateItem() {}

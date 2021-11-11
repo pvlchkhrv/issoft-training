@@ -1,25 +1,24 @@
 import { Form } from "./Form.js";
-import { userStorageAdapter } from "./data-access/adapters/UserAdapter.js";
+import { userStorageAdapter } from "./storage/adapters/UserAdapter.js";
 
 export class SignInForm extends Form {
-  constructor(form, email, password) {
+  constructor(form, emailInput, passwordInput) {
     super(form);
-    this.email = email;
-    this.password = password;
+    this.email = emailInput;
+    this.password = passwordInput;
   }
 
   submit(e) {
-    debugger;
     super.submit(e);
     const authResultSpan = document.querySelector(".auth-result");
-    const user = userStorageAdapter.getUser(this.email);
+    const user = userStorageAdapter.getUser(this.email.value);
 
     if (!user) {
       authResultSpan.style.color = "red";
       authResultSpan.innerText = "User with pointed email doesn't exist";
-    } else if (user.password === password) {
+    } else if (user.password === this.password.value) {
       authResultSpan.style.color = "black";
-      authResultSpan.innerText = email;
+      authResultSpan.innerText = this.email.value;
     } else {
       authResultSpan.style.color = "red";
       authResultSpan.innerText = "Authorization failed";

@@ -2,10 +2,6 @@ import { Modal } from "./Modal.js";
 import { SignInForm } from "./SignInForm.js";
 import { SignUpForm } from "./SignUpForm.js";
 
-// if (!localStorage.getItem("users")) {
-//   localStorage.setItem("users", JSON.stringify({}));
-// }
-
 // work with modals
 const signInOpenButton = document.querySelector(".auth-buttons__sign-in");
 const signUpOpenButton = document.querySelector(".auth-buttons__sign-up");
@@ -17,6 +13,7 @@ export const signUpModal = new Modal(document.querySelector("#sign-up-modal"));
 
 signInOpenButton.addEventListener("click", () => signInModal.open());
 signUpOpenButton.addEventListener("click", () => signUpModal.open());
+
 signInCloseButton.addEventListener("click", (e) => {
   e.preventDefault();
   signInModal.close();
@@ -64,9 +61,10 @@ signUpForm.getInputs().forEach((input) => {
 
 signInForm.form.addEventListener("submit", (e) => {
   signInForm.submit(e);
+  signInModal.close();
 });
 
 signUpForm.form.addEventListener("submit", (e) => {
   signUpForm.submit(e);
-  console.log("CLICK");
+  signUpModal.close();
 });

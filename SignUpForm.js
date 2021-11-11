@@ -1,5 +1,5 @@
 import { Form } from "./Form.js";
-import { userStorageAdapter } from "./data-access/adapters/UserAdapter.js";
+import { userStorageAdapter } from "./storage/adapters/UserAdapter.js";
 
 export class SignUpForm extends Form {
   constructor(form, emailInput, passwordInput, passwordConfirmationInput) {
@@ -19,7 +19,6 @@ export class SignUpForm extends Form {
   }
 
   submit(e) {
-    debugger;
     super.submit(e);
     const authResultSpan = document.querySelector(".auth-result");
     if (this.validatePasswordConfirmation()) {
@@ -30,8 +29,8 @@ export class SignUpForm extends Form {
           email: this.email.value,
           password: this.password.value,
         });
-
-        authResultSpan.innerText = "Registered successfuly";
+        authResultSpan.style.color = "black";
+        authResultSpan.innerText = "Registered successfully";
       } else {
         authResultSpan.style.color = "red";
         authResultSpan.innerText =

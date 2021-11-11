@@ -137,12 +137,12 @@ input {
 
 /* FORM */
 .auth-form {
-  height: 400px;
+  height: 300px;
   width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .form__fieldset {
@@ -151,8 +151,8 @@ input {
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 80%;
+  justify-content: space-evenly;
+  height: 60%;
 }
 
 .form__item {
