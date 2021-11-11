@@ -10,8 +10,8 @@ export class Form {
   validate() {
     const inputs = this.getInputs();
 
-    inputs.forEach((child) => {
-      if (child.value !== "" && child.validity.patternMismatch) {
+    inputs.forEach((input) => {
+      if (input.value !== "" && input.validity.patternMismatch) {
         const messageSpan = child.nextElementSibling;
         const errorMessage = child.getAttribute("data-error");
 
