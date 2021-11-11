@@ -1,6 +1,6 @@
-import { Modal } from "./Modal.js";
-import { SignInForm } from "./SignInForm.js";
-import { SignUpForm } from "./SignUpForm.js";
+import { Modal } from "./modal/Modal.js";
+import { SignInForm } from "./forms/SignInForm.js";
+import { SignUpForm } from "./forms/SignUpForm.js";
 
 // work with modals
 const signInOpenButton = document.querySelector(".auth-buttons__sign-in");
@@ -61,10 +61,8 @@ signUpForm.getInputs().forEach((input) => {
 
 signInForm.form.addEventListener("submit", (e) => {
   signInForm.submit(e);
-  signInModal.close();
 });
 
 signUpForm.form.addEventListener("submit", (e) => {
   signUpForm.submit(e);
-  signUpModal.close();
 });
