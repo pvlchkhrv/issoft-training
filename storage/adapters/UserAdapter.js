@@ -29,9 +29,10 @@ export class UserAdapter {
     return;
   }
 
-  // updateUser(email, updatedUser) {
-  //   const users = this.getUsers();
-  // }
+  deleteUser(email) {
+    const users = this.getUsers();
+    delete users[email];
+  }
 }
 
 export const userStorageAdapter = new UserAdapter();
