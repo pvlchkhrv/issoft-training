@@ -39,7 +39,8 @@ export class SignUpForm extends Form {
         email: this.email.value,
         password: this.password.value,
       });
+      return true;
     }
-    return;
+    return false;
   }
 }

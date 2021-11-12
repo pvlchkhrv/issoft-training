@@ -9,7 +9,6 @@ export class Form {
 
   validate() {
     const inputs = this.getInputs();
-
     inputs.forEach((input) => {
       const messageSpan = input.nextElementSibling;
       if (input.value !== "" && input.validity.patternMismatch) {

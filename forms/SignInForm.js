@@ -35,11 +35,12 @@ export class SignInForm extends Form {
   submit(e) {
     super.submit(e);
     const authResultSpan = document.querySelector(".auth-result");
-    const user = userStorageAdapter.getUser(this.email.value);
 
     if (this.checkIsRegistered() && this.checkPassword()) {
       authResultSpan.style.color = "black";
       authResultSpan.innerText = this.email.value;
+      return true;
     }
+    return false;
   }
 }

@@ -145,6 +145,10 @@ input {
   justify-content: space-evenly;
 }
 
+.auth-form.hidden {
+  display: none;
+}
+
 .form__fieldset {
   border: 0;
   padding: 0;
