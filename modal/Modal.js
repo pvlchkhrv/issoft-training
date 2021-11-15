@@ -1,48 +1,44 @@
+const getTemplate = () => `
+  <div class="modal__content">
+    <button class="close-modal" id="close-modal">&times;</button>
+  </div>
+`;
+
 export class Modal {
   static instance = null;
 
   constructor() {
     if (Modal.instance) {
-      return Modal.instance;
+      return Modal2.instance;
     }
     Modal.instance = this;
+    this.$modal = document.createElement("div");
+    this.$modal.classList.add("modal");
   }
 
-  createModal() {
-    // const modal = document.createElement("div");
-    // modal.className = "modal";
-    // const modalContent = document.createElement("div");
-    // modalContent.className = "modal__content";
-    // const modalCloseButton = document.createElement("button");
-    // modalCloseButton.innerHTML = "&times;";
-    // modalCloseButton.className = "close-modal";
+  #listen() {
+    const modalCloseButton = this.$modal.firstElementChild.firstElementChild;
+    modalCloseButton.addEventListener("click", () => {
+      this.close();
+    });
   }
 
   open(form) {
-    const modal = document.createElement("div");
-    modal.className = "modal";
+    this.$modal.innerHTML = getTemplate();
+    this.$modal.firstElementChild.append(form);
+    document.body.append(this.$modal);
 
-    const modalContent = document.createElement("div");
-    modalContent.className = "modal__content";
-
-    const modalCloseButton = document.createElement("button");
-    modalCloseButton.innerHTML = "&times;";
-    modalCloseButton.className = "close-modal";
-
-    modalContent.append(modalCloseButton);
-    modalContent.append(form);
-    modal.append(modalContent);
-    document.body.append(modal);
     form.classList.remove("hidden");
-    modal.classList.add("active");
-    modal.firstElementChild.classList.add("active");
+    this.$modal.classList.add("active");
+    this.$modal.firstElementChild.classList.add("active");
+    this.#listen();
   }
 
   close() {
-    const modal = document.querySelector(".modal");
-    const form = modal.firstElementChild.lastElementChild;
+    const form = this.$modal.firstElementChild.lastElementChild;
+
     form.classList.add("hidden");
     document.body.append(form);
-    modal.remove();
+    this.$modal.remove();
   }
 }

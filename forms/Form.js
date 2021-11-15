@@ -1,6 +1,16 @@
 export class Form {
   constructor(form) {
     this.form = form;
+    this.#listen();
+  }
+
+  #listen() {
+    const inputs = this.getInputs();
+    inputs.forEach((input) => {
+      input.addEventListener("blur", () => {
+        this.validate();
+      });
+    });
   }
 
   getInputs() {

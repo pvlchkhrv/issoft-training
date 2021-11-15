@@ -33,25 +33,6 @@ const modal = new Modal();
 signInOpenButton.addEventListener("click", () => modal.open(signInFormElement));
 signUpOpenButton.addEventListener("click", () => modal.open(signUpFormElement));
 
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("close-modal")) {
-    const form = e.target.nextElementSibling;
-    modal.close(form);
-  }
-});
-
-signInForm.getInputs().forEach((input) => {
-  input.addEventListener("blur", () => {
-    signInForm.validate();
-  });
-});
-
-signUpForm.getInputs().forEach((input) => {
-  input.addEventListener("blur", () => {
-    signUpForm.validate();
-  });
-});
-
 signInForm.form.addEventListener("submit", (e) => {
   signInForm.submit(e) && modal.close();
 });
