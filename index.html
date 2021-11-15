@@ -2,25 +2,157 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISSoft Training</title>
-    <link rel="stylesheet" href="style_flex.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISSoft Training</title>
+  <link rel="stylesheet" href="./styles/style_flex.css">
 </head>
 
 <body>
-    <div class="container">
-        <header class="header">header</header>
-        <main class="content">
-            <div class="column-1">column 1</div>
-            <div class="column-2">column 2</div>
-            <div class="column-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos hic rem culpa nulla beatae asperiores, harum minima quaerat cumque. Impedit, fuga inventore quasi ut nulla minus tempore blanditiis in molestiae iusto recusandae, esse laboriosam consequatur possimus. Praesentium adipisci, accusamus reiciendis aliquid porro delectus repellendus nesciunt ratione earum rem perferendis obcaecati illum voluptatem quod molestiae veniam ipsa unde dolore quisquam corrupti error enim et laborum? Doloribus voluptas vel, debitis iusto officia eveniet. Dolorum maxime ratione itaque eaque cupiditate porro veritatis repudiandae mollitia fugit ab possimus, officia sint. Labore, beatae officiis earum excepturi modi voluptatum, quasi dolore voluptates aliquam neque adipisci molestias?</div>
-        </main>
-        <footer class="footer">footer</footer>
-    </div>
+  <div class="container">
+        <!-- HEADER -->
+    <header class="header">
+      <h1>ISSoft Training</h1>
+      <span class="auth-result"></span>
+      <div class="auth-buttons">
+        <button class="auth-buttons__sign-in">Sign In Form</button>
+        <button class="auth-buttons__sign-up">Sign Up Form</button>
+      </div>
+    </header>
 
-    <script src="index.js"></script>
+    <!-- MODALS -->
+    <!-- <div class="modal" id="modal"></div> -->
+    <!-- <div class="modal" id="sign-in-modal">
+      <div class="modal__content">
+        <button class="close-modal" id="close-sign-in">&times;</button> -->
+        <form action="#" class="auth-form hidden" id="sign-in">
+          <h2 class="form__title">Sign In</h2>
+          <fieldset class="form__fieldset">
+            <label class="form__item">
+              <span class="form__label">Email</span>
+              <input class="form__input"  id="sign-in__email" type="email" placeholder="Enter email" pattern="^[^\s@]+@[^\s@]+$" data-error='Invalid email' data-success='success'> 
+              <span class="form__input__message"></span>
+            </label>
+            <label class="form__item">
+              <span class="form__label">Password</span>
+              <input class="form__input" id="sign-in__password" type="password" placeholder="Enter password" pattern="(?=^.{4,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" data-error='Invalid password' data-success='password ok'>
+              <span class="form__input__message"></span>
+            </label>
+          </fieldset>
+          <div class="form__item form__item--actions">
+            <button class="form__btn form__btn--primary" type="submit">Sign In</button>
+          </div>
+        </form>
+      <!-- </div>
+
+    </div> -->
+
+    <!-- <div class="modal" id="sign-up-modal">
+      <div class="modal__content">
+        <button class="close-modal" id="close-sign-up">&times;</button> -->
+
+        <form action="#" class="auth-form hidden" id="sign-up">
+          <h2 class="form__title">Sign Up</h2>
+          <fieldset class="form__fieldset">
+            <label class="form__item">
+              <span class="form__label">Email</span>
+              <input class="form__input" id="sign-up__email" type="email" placeholder="Enter email" pattern="^[^\s@]+@[^\s@]+$" required data-error='Invalid email'> 
+              <span class="form__input__message"></span>
+            </label>
+            <label class="form__item">
+              <span class="form__label">Password</span>
+              <input class="form__input" id="sign-up__password" type="password" placeholder="Enter password" pattern="(?=^.{4,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required data-error='Invalid password'>
+              <span class="form__input__message"></span>
+            </label>
+            <label class="form__item">
+              <span class="form__label">Confirm password</span>
+              <input class="form__input" id="sign-up__password-confirmation" type="password" placeholder="Confirm password" pattern="(?=^.{4,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required data-error='Invalid password confirmation'>
+              <span class="form__input__message"></span>
+            </label>
+          </fieldset>
+          <div class="form__item form__item--actions">
+            <button class="form__btn form__btn--primary" type="submit">Sign Up</button>
+          </div>
+        </form>
+
+      <!-- </div>
+    </div> -->
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <div class="column-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam eum unde fugit consectetur
+        autem praesentium sed amet pariatur ipsum asperiores accusamus natus quam tenetur accusantium, officia tempore
+        rerum velit! Eius.
+        At maxime minus quaerat laboriosam necessitatibus officiis reiciendis aut impedit saepe aliquid blanditiis
+        illum, mollitia ipsam eaque est nulla autem quo sint assumenda nostrum nisi consectetur molestiae ullam. Magni,
+        culpa.
+        Voluptatibus necessitatibus cumque praesentium fugit esse aperiam officia, veritatis quae fuga libero eos
+        expedita cupiditate iusto ad nostrum delectus doloremque eius ipsam id, mollitia aliquam dignissimos accusamus?
+        Impedit, delectus ratione.
+        Corrupti praesentium corporis et cumque vitae aliquid ipsa deleniti? Dicta, quo? Consequatur deserunt asperiores
+        odit dicta libero, sed quia quos! In exercitationem ea repudiandae dicta repellat animi dolorem officia iusto!
+        Eveniet reprehenderit dolor repellendus commodi provident minima ab assumenda maiores harum illo ut officiis
+        tempore autem exercitationem iste ducimus nisi voluptates, facere laborum praesentium possimus? Similique
+        maiores placeat vero corrupti?
+        Nesciunt natus, velit totam voluptate dolor assumenda! Libero dolor unde impedit, dolore odit quia labore
+        distinctio architecto. Reprehenderit, soluta sapiente perferendis animi eveniet recusandae consequatur tenetur
+        magnam omnis quas nostrum.
+        Similique veritatis facere aliquam non aperiam quas dolorum deleniti incidunt, iusto accusantium dolore!
+        Assumenda ipsum doloremque, eius dolorem vero repellat porro ab iste fugit libero aperiam distinctio in nihil
+        minus!
+        Dolores culpa quae nisi iure in! Ad nisi officia nihil beatae reiciendis minus est dolor, animi ea debitis! Fuga
+        deserunt ea neque? Magni veritatis fugiat sapiente est consequuntur inventore sint.
+        Impedit assumenda maiores, nesciunt quasi facere inventore nisi, laudantium neque temporibus quia non. Dolores
+        delectus necessitatibus inventore corrupti iste culpa, esse doloremque eius. Id, minus officiis aliquam magni
+        eligendi perferendis.
+        Cum perspiciatis quaerat deleniti quod ut eligendi esse nam eius non ratione ex vitae, dignissimos dolor.
+        Nesciunt maxime veniam officia recusandae? Asperiores distinctio quibusdam harum aperiam nobis odit libero sit.
+        Expedita sint minima quod vitae maxime totam odit recusandae iusto amet sit! Illum exercitationem dolores
+        impedit distinctio vero consequuntur inventore ullam, at quidem tempora, perspiciatis obcaecati? Laboriosam
+        eligendi totam unde.
+        Voluptatem, blanditiis. Inventore veniam distinctio aut adipisci nisi non repudiandae quos blanditiis obcaecati,
+        saepe expedita ratione ad voluptates at reprehenderit voluptatum vitae. Quisquam numquam sint ea cumque dolorum,
+        nam deserunt.
+        Magnam aliquam vel fugit, ex commodi totam animi nam voluptatibus, doloremque et provident explicabo sint in
+        facere reprehenderit odit! Rerum nisi reiciendis eum vel ex aspernatur a. Debitis, quibusdam perferendis.
+        Nostrum repellat adipisci voluptatem iste, accusantium labore veniam tempore, facilis amet corrupti, officia
+        officiis autem. Impedit odit asperiores, tempora sunt, maxime quis repellat nesciunt, illo ut commodi quam at
+        quae.
+        Quas itaque quia praesentium assumenda accusantium aperiam! Debitis, repellat facere. Quos aspernatur fugiat
+        quia unde quaerat labore quis. Voluptates, itaque quaerat reiciendis reprehenderit ex pariatur accusantium
+        expedita. Corrupti, dolorum magnam.
+        Porro quidem impedit asperiores, explicabo veniam omnis laudantium sunt a minus recusandae possimus. Repudiandae
+        quis consequuntur aperiam dolorem nesciunt fugit ipsam distinctio libero, sit accusantium, velit at illo
+        voluptatem necessitatibus.
+        Veniam ea tempora recusandae? Ipsum, voluptates corrupti deleniti eveniet magnam architecto in enim. Commodi,
+        exercitationem illo quaerat, debitis provident aliquam explicabo blanditiis fugit sunt eligendi dolorum
+        necessitatibus vero tempore enim.
+        Voluptatibus dolorem quae illum nostrum optio hic dolore harum facilis, itaque earum tenetur eveniet. Inventore
+        hic quos veniam sapiente odio eligendi adipisci totam tempore, blanditiis earum quidem, quo quod fuga.
+        Beatae officiis dolorum laudantium itaque tempora voluptate maiores nesciunt, expedita magni ducimus sapiente
+        iusto qui repudiandae quod nam rerum perferendis voluptatem necessitatibus consectetur quis eius cum ad.
+        Aspernatur, quod saepe.
+        Officia odio sunt aperiam soluta. Ab omnis repellendus quaerat cum, fuga quidem ratione amet saepe quo corporis!
+        Illo, vero veritatis, repudiandae id ipsa enim facere tenetur, exercitationem fugiat hic sint?</div>
+      <div class="column-2">column 2</div>
+      <div class="column-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos hic rem culpa nulla
+        beatae asperiores, harum minima quaerat cumque. Impedit, fuga inventore quasi ut nulla minus tempore blanditiis
+        in molestiae iusto recusandae, esse laboriosam consequatur possimus. Praesentium adipisci, accusamus reiciendis
+        aliquid porro delectus repellendus nesciunt ratione earum rem perferendis obcaecati illum voluptatem quod
+        molestiae veniam ipsa unde dolore quisquam corrupti error enim et laborum? Doloribus voluptas vel, debitis iusto
+        officia eveniet. Dolorum maxime ratione itaque eaque cupiditate porro veritatis repudiandae mollitia fugit ab
+        possimus, officia sint. Labore, beatae officiis earum excepturi modi voluptatum, quasi dolore voluptates aliquam
+        neque adipisci molestias?</div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">footer</footer>
+  </div>
+
+  <script src="./index.js" type="module"></script>
 </body>
+
+
 
 </html>
