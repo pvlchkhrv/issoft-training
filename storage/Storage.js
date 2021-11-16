@@ -6,12 +6,6 @@ class Storage {
   getItem(key) {
     return localStorage.getItem(key);
   }
-
-  // updateItem(key, newValue) {
-  //   this.setItem(key, newValue);
-  // }
-
-  // deleteItem() {}
 }
 
 export const storage = new Storage();

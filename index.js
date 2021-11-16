@@ -36,6 +36,7 @@ signUpOpenButton.addEventListener("click", () => modal.open(signUpFormElement));
 
 signInForm.form.addEventListener("submit", (e) => {
   signInForm.submit(e) && modal.close();
+  document.body.append(signInForm.form);
   userStorageAdapter.setCurrentUser(signInForm.email.value);
   console.log(signInForm.email);
   window.location.href = "home.html";
@@ -43,4 +44,5 @@ signInForm.form.addEventListener("submit", (e) => {
 
 signUpForm.form.addEventListener("submit", (e) => {
   signUpForm.submit(e) && modal.close();
+  document.body.append(signInForm.form);
 });

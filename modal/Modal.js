@@ -24,7 +24,6 @@ export class Modal {
   }
 
   open(form) {
-    debugger;
     this.$modal.innerHTML = getTemplate();
     this.$modal.firstElementChild.append(form);
     document.body.append(this.$modal);
@@ -37,9 +36,7 @@ export class Modal {
 
   close() {
     const form = this.$modal.firstElementChild.lastElementChild;
-
     form.classList.add("hidden");
-    document.body.append(form);
     this.$modal.remove();
   }
 }

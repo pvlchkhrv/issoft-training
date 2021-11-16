@@ -30,8 +30,7 @@ export class UserAdapter {
   }
 
   updateUser(email, updatedUser) {
-    /// ??????????????????????
-    const users = getUsers();
+    const users = this.getUsers();
     users[email] = updatedUser;
     this.setUsers(users);
   }
@@ -47,6 +46,7 @@ export class UserAdapter {
   deleteUser(email) {
     const users = this.getUsers();
     delete users[email];
+    this.setUsers(users);
   }
 }
 

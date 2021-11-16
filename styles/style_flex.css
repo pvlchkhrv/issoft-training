@@ -76,6 +76,7 @@ input {
 
 .column-2 {
   background-color: grey;
+  width: 900px;
 }
 
 .column-3 {
@@ -223,4 +224,9 @@ td {
 td {
   background-color: #96d4d4;
   height: 70px;
+  min-width: 50px;
+}
+
+td > button {
+  width: 50px;
 }

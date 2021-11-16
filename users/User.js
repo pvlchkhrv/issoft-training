@@ -18,28 +18,41 @@ const getTemplate = (user) => `
 export class User {
   constructor(user) {
     this.user = user;
-    this.$userHTML = document.createElement("tr");
+    this.$user = document.createElement("tr");
     this.currentUser = userStorageAdapter.getCurrentUser();
     this.#render(this.user);
     this.#listen();
   }
 
   #listen() {
-    const $editButton = this.$userHTML.lastElementChild.firstElementChild;
+    const $editButton = this.$user.lastElementChild.firstElementChild;
+    const $deleteButton = this.$user.lastElementChild.lastElementChild;
+    console.dir($deleteButton);
+    console.dir($editButton);
     $editButton.addEventListener("click", () => this.onEditClick(this.user));
+    $deleteButton.addEventListener("click", () =>
+      this.onDeleteClick(this.user.email)
+    );
   }
 
   #render(user) {
-    this.$userHTML.innerHTML = getTemplate(user);
-  }
-
-  getUserHTML() {
-    return this.$userHTML;
+    this.$user.innerHTML = getTemplate(user);
   }
 
   onEditClick(user) {
     const $modal = new Modal();
-    const $editUserForm = new EditUserForm(user).html;
+    const $editUserForm = new EditUserForm(user).$form;
     $modal.open($editUserForm);
+  }
+
+  onDeleteClick(email) {
+    debugger;
+    const currentUser = userStorageAdapter.getCurrentUser();
+    if (email === currentUser) {
+      alert("You can not delete yourself");
+    } else {
+      userStorageAdapter.deleteUser(email);
+      alert("User has benn deleted");
+    }
   }
 }

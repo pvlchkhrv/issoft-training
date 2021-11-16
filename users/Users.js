@@ -1,7 +1,5 @@
 import { userStorageAdapter } from "../storage/adapters/UserAdapter.js";
 import { User } from "./User.js";
-import { Modal } from "../modal/Modal.js";
-import { EditUserForm } from "../forms/EditUserForm.js";
 
 const getTemplate = () => `
 <table class="users">
@@ -29,7 +27,7 @@ export class Users {
     this.$users.innerHTML = getTemplate();
     $column.append(this.$users);
     for (let key in users) {
-      const $user = new User(users[key]).getUserHTML();
+      const $user = new User(users[key]).$user;
       this.$users.append($user);
     }
   }
