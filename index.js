@@ -1,6 +1,7 @@
 import { Modal } from "./modal/Modal.js";
 import { SignInForm } from "./forms/SignInForm.js";
 import { SignUpForm } from "./forms/SignUpForm.js";
+import { userStorageAdapter } from "./storage/adapters/UserAdapter.js";
 
 // work with forms
 const signInFormElement = document.querySelector("#sign-in");
@@ -35,6 +36,9 @@ signUpOpenButton.addEventListener("click", () => modal.open(signUpFormElement));
 
 signInForm.form.addEventListener("submit", (e) => {
   signInForm.submit(e) && modal.close();
+  userStorageAdapter.setCurrentUser(signInForm.email.value);
+  console.log(signInForm.email);
+  window.location.href = "home.html";
 });
 
 signUpForm.form.addEventListener("submit", (e) => {

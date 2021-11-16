@@ -21,7 +21,11 @@ export class Form {
     const inputs = this.getInputs();
     inputs.forEach((input) => {
       const messageSpan = input.nextElementSibling;
-      if (input.value !== "" && input.validity.patternMismatch) {
+      if (
+        input.value !== "" &&
+        // input.getAttribute("pattern") &&
+        input.validity.patternMismatch
+      ) {
         const errorMessage = input.getAttribute("data-error");
 
         messageSpan.style.color = "red";

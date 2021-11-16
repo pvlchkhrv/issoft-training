@@ -5,11 +5,11 @@
 }
 
 body {
-  background-color: lightgrey;
+  background-color: aqua;
 }
 
 .container {
-  background-color: aqua;
+  background-color: lightgray;
   min-height: 100vh;
   max-width: 1200px;
   display: flex;
@@ -62,10 +62,11 @@ input {
 }
 
 .content > * {
-  min-height: 400px;
+  min-height: 100vh;
   width: 400px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   text-align: center;
 }
 
@@ -83,7 +84,7 @@ input {
 
 /* FOOTER */
 .footer {
-  background-color: red;
+  background-color: moccasin;
   width: 100%;
   height: 80px;
   position: absolute;
@@ -145,7 +146,16 @@ input {
   justify-content: space-evenly;
 }
 
-.auth-form.hidden {
+.edit-user-form {
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.form.hidden {
   display: none;
 }
 
@@ -174,8 +184,11 @@ input {
 }
 
 .form__input {
-  /* line-height: 42px; */
+  line-height: 42px;
   order: 1;
+  height: 30px;
+  border: 2px lightsalmon solid;
+  background-color: lightyellow;
 }
 .form__input__message {
   order: 2;
@@ -192,4 +205,22 @@ input {
   flex-direction: row;
   margin: -24px;
   padding: 24px;
+}
+
+/* USERS TABLE */
+table {
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+table,
+th,
+td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+
+td {
+  background-color: #96d4d4;
+  height: 70px;
 }

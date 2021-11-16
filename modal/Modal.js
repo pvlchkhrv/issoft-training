@@ -9,7 +9,7 @@ export class Modal {
 
   constructor() {
     if (Modal.instance) {
-      return Modal2.instance;
+      return Modal.instance;
     }
     Modal.instance = this;
     this.$modal = document.createElement("div");
@@ -24,6 +24,7 @@ export class Modal {
   }
 
   open(form) {
+    debugger;
     this.$modal.innerHTML = getTemplate();
     this.$modal.firstElementChild.append(form);
     document.body.append(this.$modal);

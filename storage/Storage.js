@@ -7,9 +7,11 @@ class Storage {
     return localStorage.getItem(key);
   }
 
-  updateItem() {}
+  // updateItem(key, newValue) {
+  //   this.setItem(key, newValue);
+  // }
 
-  deleteItem() {}
+  // deleteItem() {}
 }
 
 export const storage = new Storage();
