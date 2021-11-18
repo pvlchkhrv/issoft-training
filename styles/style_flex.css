@@ -191,6 +191,15 @@ input {
   border: 2px lightsalmon solid;
   background-color: lightyellow;
 }
+
+.form__input:invalid {
+  border-color: red;
+}
+
+.form__input:valid {
+  border-color: green;
+}
+
 .form__input__message {
   order: 2;
   font-size: 0.7rem;

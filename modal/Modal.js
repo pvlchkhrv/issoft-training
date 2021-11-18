@@ -40,3 +40,5 @@ export class Modal {
     this.$modal.remove();
   }
 }
+
+export const modal = new Modal();

@@ -11,7 +11,7 @@
 
 <body>
   <div class="container">
-        <!-- HEADER -->
+    <!-- HEADER -->
     <header class="header">
       <h1>ISSoft Training</h1>
       <span class="auth-result"></span>
@@ -21,53 +21,11 @@
       </div>
     </header>
 
-    <!-- FORMS -->
-    <form action="#" class="form auth-form hidden" id="sign-in">
-      <h2 class="form__title">Sign In</h2>
-      <fieldset class="form__fieldset">
-        <label class="form__item">
-          <span class="form__label">Email</span>
-          <input class="form__input"  id="sign-in__email" type="email" placeholder="Enter email" pattern="^[^\s@]+@[^\s@]+$" data-error='Invalid email' data-success='success' required> 
-          <span class="form__input__message"></span>
-        </label>
-        <label class="form__item">
-          <span class="form__label">Password</span>
-          <input class="form__input" id="sign-in__password" type="password" placeholder="Enter password" pattern="(?=^.{4,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" data-error='Invalid password' data-success='password ok'>
-          <span class="form__input__message"></span>
-        </label>
-      </fieldset>
-      <div class="form__item form__item--actions">
-        <button class="form__btn form__btn--primary" type="submit">Sign In</button>
-      </div>
-    </form>
-
-    <form action="#" class="form auth-form hidden" id="sign-up">
-      <h2 class="form__title">Sign Up</h2>
-      <fieldset class="form__fieldset">
-        <label class="form__item">
-          <span class="form__label">Email</span>
-          <input class="form__input" id="sign-up__email" type="email" placeholder="Enter email" pattern="^[^\s@]+@[^\s@]+$" required data-error='Invalid email'> 
-          <span class="form__input__message"></span>
-        </label>
-        <label class="form__item">
-          <span class="form__label">Password</span>
-          <input class="form__input" id="sign-up__password" type="password" placeholder="Enter password" pattern="(?=^.{4,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required data-error='Invalid password'>
-          <span class="form__input__message"></span>
-        </label>
-        <label class="form__item">
-          <span class="form__label">Confirm password</span>
-          <input class="form__input" id="sign-up__password-confirmation" type="password" placeholder="Confirm password" pattern="(?=^.{4,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required data-error='Invalid password confirmation'>
-          <span class="form__input__message"></span>
-        </label>
-      </fieldset>
-      <div class="form__item form__item--actions">
-        <button class="form__btn form__btn--primary" type="submit">Sign Up</button>
-      </div>
-    </form>
-
     <!-- MAIN CONTENT -->
     <main class="content">
-        Hello, User! Please Sign In or Sign Up! 
+      <div class="column-1"></div>
+      <div class="column-2"></div>
+      <div class="column-3"></div>
     </main>
 
     <!-- FOOTER -->
