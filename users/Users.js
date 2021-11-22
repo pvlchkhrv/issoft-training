@@ -1,5 +1,6 @@
 import { userStorageAdapter } from "../storage/adapters/UserAdapter.js";
 import { User } from "./User.js";
+import { Component } from "../components/Component.js";
 
 const getTemplate = () => {
   const $users = document.createElement("table");
@@ -20,20 +21,18 @@ const getTemplate = () => {
   return $users;
 };
 
-export class Users {
-  constructor() {
-    this.$users = getTemplate();
+export class Users extends Component {
+  constructor(props) {
+    super(props);
+    this.$component = getTemplate();
     this.users = userStorageAdapter.getUsers();
-    this.currentUser = userStorageAdapter.getCurrentUser();
-    this.#render(this.users);
+    this.render();
   }
 
-  #render(users) {
-    const $column = document.querySelector(".column-2");
-    $column.append(this.$users);
-    for (let email in users) {
-      const $user = new User(users[email]).$user;
-      this.$users.append($user);
+  render() {
+    for (let email in this.users) {
+      const $user = new User({ user: this.users[email] }).html;
+      this.$component.append($user);
     }
   }
 }

@@ -1,6 +1,6 @@
-import {Component} from "../Component.js";
+import { Component } from "../Component.js";
 
-export class Form extends Component{
+export class Form extends Component {
   constructor(props, children) {
     super(props, children);
   }
@@ -11,6 +11,9 @@ export class Form extends Component{
       input.addEventListener("blur", () => {
         this.validate(form);
       });
+    });
+    form.addEventListener("submit", (e) => {
+      this.submit(e);
     });
   }
 

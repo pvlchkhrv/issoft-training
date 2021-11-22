@@ -1,18 +1,18 @@
 export class Component {
   constructor(props, children) {
-    this.$component;
-    this.props = props;
-    this.children = children;
+    this.$component = null;
+    this.props = props ? props : null;
+    this.children = children ? children : null;
   }
 
   get html() {
     return this.$component;
   }
 
-  render() {
+  renderChildren() {
     this.children &&
       this.children.forEach((child) => {
-        this.$component.append(child);
+        this.$component && this.$component.append(child);
       });
   }
 

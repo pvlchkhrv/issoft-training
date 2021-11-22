@@ -1,13 +1,13 @@
-import { modal } from "../Modal";
+import { modal } from "../Modal.js";
 import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
-import { SignUpForm } from "./SignUpForm.js";
-
+import { Form } from "./Form.js";
+import { ChangePasswordForm } from "./ChangePasswordForm.js";
 
 const getTemplate = (user) => {
+  debugger;
   const $form = document.createElement("form");
   $form.classList.add("form", "edit-user-form", "hidden");
   $form.id = "edit-user-form";
-
   $form.insertAdjacentHTML(
     "afterbegin",
     `
@@ -20,21 +20,7 @@ const getTemplate = (user) => {
         } > 
         <span class="form__input__message"></span>
       </label>
-      <label class="form__item">
-        <span class="form__label">Password</span>
-        <input class="form__input" id="edit-user-form__password" type="password" placeholder="Enter password" required data-error='Invalid password' value=${
-          user.password
-        } name="password">
-        <span class="form__input__message"></span>
-      </label>
-      <label class="form__item">
-        <span class="form__label">Confirm Password</span>
-        <input class="form__input" id="edit-user-form__password-confirmation" type="password" placeholder="Enter password" required data-error='Invalid password' value=${
-          user.password
-        } name="confirm-password">
-        <span class="form__input__message"></span>
-      </label>
-      <label class="form__item">
+        <label class="form__item">
         <span class="form__label">Date of birth</span>
         <input class="form__input" id="edit-user-form__date-of-birth" type="date" name="date" value=${
           user.dateOfBirth || ""
@@ -44,7 +30,7 @@ const getTemplate = (user) => {
       <label class="form__item">
         <span class="form__label">Sex</span>
         <select class="form__input" id="edit-user-form__sex" required form="edit-user-form" name="sex" value=${
-          user.sex || ""
+          user.sex
         } >
           <option value="male">Male</option>
             <option value="female">Female</option>
@@ -53,10 +39,15 @@ const getTemplate = (user) => {
       </label>
       <label class="form__item">
         <span class="form__label">Smoker</span>
-        <input type="checkbox" class="form__input" id="edit-user-form__smoker" name="smoker" >
+        <input type="checkbox" class="form__input" id="edit-user-form__smoker" name="smoker">
         <span class="form__input__message"></span>
       </label>
     </fieldset>
+
+    <div class="form__item">
+        <a href="#" class="form__change-password-link">Change email or password</a> 
+    </div>
+        
     <div class="form__item form__item--actions">
       <button class="form__btn form__btn--primary" type="submit">Set changes</button>
     </div>
@@ -65,39 +56,46 @@ const getTemplate = (user) => {
   return $form;
 };
 
-export class EditUserForm extends SignUpForm {
-  constructor(user) {
-    super();
-    this.user = user;
+export class EditUserForm extends Form {
+  constructor(props) {
+    debugger;
+    super(props);
+    this.user = props.user;
     this.updatedUser = {
       ...this.user,
     };
-    this.$form = getTemplate(this.user);
-    // this.#listen();
+    this.$component = getTemplate(this.user);
+    this.#listen();
   }
 
   #listen() {
-    this.$form.addEventListener("submit", (e) => {
+    this.$component.addEventListener("submit", (e) => {
       this.submit(e);
+    });
+
+    this.$component.addEventListener("click", (e) => {
+      if (e.target.classList.contains("form__change-password-link")) {
+        e.preventDefault();
+        modal.close();
+        const $changePasswordForm = new ChangePasswordForm({ user: this.user });
+        modal.open($changePasswordForm.html);
+      }
     });
   }
 
-  getInputs() {
-    return Array.from(this.$form).filter(
+  getFields() {
+    return Array.from(this.$component).filter(
       (child) => child.tagName === "INPUT" || child.tagName === "SELECT"
     );
   }
 
   updateUserInfo() {
-    const inputs = this.getInputs();
+    const inputs = this.getFields();
 
     inputs.forEach((input) => {
       switch (input.name) {
         case "user-name":
           this.updatedUser.name = input.value;
-          break;
-        case "password":
-          this.updatedUser.password = input.value;
           break;
         case "date":
           this.updatedUser.dateOfBirth = input.value;
@@ -115,9 +113,9 @@ export class EditUserForm extends SignUpForm {
   }
 
   submit(e) {
+    super.submit(e);
     this.updateUserInfo();
     userStorageAdapter.updateUser(this.user.email, this.updatedUser);
-    this.$form.remove();
     modal.close();
   }
 }

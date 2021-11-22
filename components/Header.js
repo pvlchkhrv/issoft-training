@@ -32,20 +32,16 @@ export class Header extends Component {
       switch (buttonId) {
         case "auth-buttons__sign-in":
           const signInForm = new SignInForm();
-          modal.open(signInForm.$form);
+          modal.open(signInForm.html);
           break;
         case "auth-buttons__sign-up":
           const signUpForm = new SignUpForm();
-          modal.open(signUpForm.$form);
+          modal.open(signUpForm.html);
           break;
         default:
           return;
       }
     });
-  }
-
-  render() {
-    super.render();
   }
 }
 

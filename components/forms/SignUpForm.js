@@ -1,7 +1,7 @@
 import { Form } from "./Form.js";
 import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
 import { modal } from "../Modal.js";
-import {handleMessageSpan} from "../../utils/handleMessageSpan.js";
+import { handleMessageSpan } from "../../utils/handleMessageSpan.js";
 
 const getTemplate = () => {
   const $form = document.createElement("form");
@@ -40,22 +40,11 @@ const getTemplate = () => {
 export class SignUpForm extends Form {
   constructor() {
     super();
-    this.$form = getTemplate();
-    this.$email = this.$form[1];
-    this.$password = this.$form[2];
-    this.$passwordConfirmation = this.$form[3];
-    super.listen(this.$form);
-    this.#listen();
-  }
-
-  #listen() {
-    this.$form.addEventListener("submit", (e) => {
-      this.submit(e);
-    });
-  }
-
-  validate() {
-    super.validate(this.$form);
+    this.$component = getTemplate();
+    this.$email = this.$component[1];
+    this.$password = this.$component[2];
+    this.$passwordConfirmation = this.$component[3];
+    super.listen(this.$component);
   }
 
   checkIsUnique() {
@@ -68,7 +57,7 @@ export class SignUpForm extends Form {
   validatePasswordConfirmation() {
     const messageSpan = this.$passwordConfirmation.nextElementSibling;
     const message = "Confirmation failed";
-    const condition = this.$password.value !== this.$passwordConfirmation.value
+    const condition = this.$password.value !== this.$passwordConfirmation.value;
     return handleMessageSpan(condition, messageSpan, message);
   }
 
@@ -79,7 +68,7 @@ export class SignUpForm extends Form {
         email: this.$email.value,
         password: this.$password.value,
       });
-      this.$form.remove();
+      this.$component.remove();
       modal.close();
     }
   }

@@ -1,7 +1,7 @@
 import { Form } from "./Form.js";
 import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
 import { modal } from "../Modal.js";
-import {handleMessageSpan} from "../../utils/handleMessageSpan.js";
+import { handleMessageSpan } from "../../utils/handleMessageSpan.js";
 
 const getTemplate = () => {
   const $form = document.createElement("form");
@@ -40,13 +40,12 @@ const getLogoutButton = () => {
 };
 
 export class SignInForm extends Form {
-  constructor() {
-    super();
-    this.$form = getTemplate();
-    this.$email = this.$form[1];
-    this.$password = this.$form[2];
-    super.listen(this.$form);
-    this.#listen();
+  constructor(props, children) {
+    super(props, children);
+    this.$component = getTemplate();
+    this.$email = this.$component[1];
+    this.$password = this.$component[2];
+    super.listen(this.$component);
   }
 
   #listen() {
@@ -55,20 +54,14 @@ export class SignInForm extends Form {
     });
   }
 
-  validate() {
-    super.validate(this.$form);
-  }
-
-  checkIsRegistered() {
+  checkIsRegistered(user) {
     const messageSpan = this.$email.nextElementSibling;
-    const user = userStorageAdapter.getUser(this.$email.value);
     const message = "User hasn't been registered";
     return handleMessageSpan(!user, messageSpan, message);
   }
 
-  checkPassword() {
+  checkPassword(user) {
     const messageSpan = this.$password.nextElementSibling;
-    const user = userStorageAdapter.getUser(this.$email.value);
     const message = "Wrong password";
     const condition = user.password !== this.$password.value;
     return handleMessageSpan(condition, messageSpan, message);
@@ -76,10 +69,11 @@ export class SignInForm extends Form {
 
   submit(e) {
     super.submit(e);
+    const user = userStorageAdapter.getUser(this.$email.value);
     const $authResult = document.querySelector(".auth-result");
     const $authButtons = document.querySelector(".auth-buttons");
     const modalButtons = document.querySelectorAll(".open-modal");
-    if (this.checkIsRegistered() && this.checkPassword()) {
+    if (this.checkIsRegistered(user) && this.checkPassword(user)) {
       const $logoutButton = getLogoutButton();
       $authResult.style.color = "black";
       $authResult.innerText = this.$email.value;
