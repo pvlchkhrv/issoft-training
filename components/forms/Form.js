@@ -1,24 +1,28 @@
-export class Form {
-  constructor(form) {
-    this.form = form;
-    this.#listen();
+import { Component } from "../Component.js";
+
+export class Form extends Component {
+  constructor(props, children) {
+    super(props, children);
   }
 
-  #listen() {
-    const inputs = this.getInputs();
+  listen(form) {
+    const inputs = this.getInputs(form);
     inputs.forEach((input) => {
       input.addEventListener("blur", () => {
-        this.validate();
+        this.validate(form);
       });
+    });
+    form.addEventListener("submit", (e) => {
+      this.submit(e);
     });
   }
 
-  getInputs() {
-    return Array.from(this.form).filter((child) => child.tagName === "INPUT");
+  getInputs(form) {
+    return Array.from(form).filter((child) => child.tagName === "INPUT");
   }
 
-  validate() {
-    const inputs = this.getInputs();
+  validate(form) {
+    const inputs = this.getInputs(form);
     inputs.forEach((input) => {
       const messageSpan = input.nextElementSibling;
       if (input.value !== "" && input.validity.patternMismatch) {

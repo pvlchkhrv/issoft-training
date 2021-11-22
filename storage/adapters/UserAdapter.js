@@ -29,9 +29,24 @@ export class UserAdapter {
     return;
   }
 
+  updateUser(email, updatedUser) {
+    const users = this.getUsers();
+    users[email] = updatedUser;
+    this.setUsers(users);
+  }
+
+  setCurrentUser(email) {
+    storage.setItem("currentUser", JSON.stringify(email));
+  }
+
+  getCurrentUser() {
+    return JSON.parse(storage.getItem("currentUser"));
+  }
+
   deleteUser(email) {
     const users = this.getUsers();
     delete users[email];
+    this.setUsers(users);
   }
 }
 
