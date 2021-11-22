@@ -1,9 +1,14 @@
-export class Form {
+import {Component} from "../Component.js";
+
+export class Form extends Component{
+  constructor(props, children) {
+    super(props, children);
+  }
+
   listen(form) {
     const inputs = this.getInputs(form);
     inputs.forEach((input) => {
       input.addEventListener("blur", () => {
-        console.log("blur");
         this.validate(form);
       });
     });

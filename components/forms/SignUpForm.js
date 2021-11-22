@@ -1,6 +1,7 @@
 import { Form } from "./Form.js";
-import { userStorageAdapter } from "../storage/adapters/UserAdapter.js";
-import { modal } from "../modal/Modal.js";
+import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
+import { modal } from "../Modal.js";
+import {handleMessageSpan} from "../../utils/handleMessageSpan.js";
 
 const getTemplate = () => {
   const $form = document.createElement("form");
@@ -14,7 +15,7 @@ const getTemplate = () => {
     <fieldset class="form__fieldset">
       <label class="form__item">
         <span class="form__label">Email</span>
-        <input class="form__input" id="sign-up__email" type="email" placeholder="Enter email" required data-error='Invalid email'> 
+        <input class="form__input" id="sign-up__email" type="email" placeholder="Enter email" required data-error='Invalid email' pattern="^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"> 
         <span class="form__input__message"></span>
       </label>
       <label class="form__item">
@@ -39,7 +40,6 @@ const getTemplate = () => {
 export class SignUpForm extends Form {
   constructor() {
     super();
-    debugger;
     this.$form = getTemplate();
     this.$email = this.$form[1];
     this.$password = this.$form[2];
@@ -61,25 +61,15 @@ export class SignUpForm extends Form {
   checkIsUnique() {
     const user = userStorageAdapter.getUser(this.$email.value);
     const messageSpan = this.$email.nextElementSibling;
-    if (user) {
-      messageSpan.style.color = "red";
-      messageSpan.innerText = "User has been already registered";
-      console.log("User has been already registered");
-      return false;
-    }
-    messageSpan.innerText = "";
-    return true;
+    const message = "User has been registered already";
+    return handleMessageSpan(user, messageSpan, message);
   }
 
   validatePasswordConfirmation() {
     const messageSpan = this.$passwordConfirmation.nextElementSibling;
-    if (this.$password.value !== this.$passwordConfirmation.value) {
-      messageSpan.style.color = "red";
-      messageSpan.innerText = "Confirmation failed";
-      return false;
-    }
-    messageSpan.innerText = "";
-    return true;
+    const message = "Confirmation failed";
+    const condition = this.$password.value !== this.$passwordConfirmation.value
+    return handleMessageSpan(condition, messageSpan, message);
   }
 
   submit(e) {
@@ -92,6 +82,5 @@ export class SignUpForm extends Form {
       this.$form.remove();
       modal.close();
     }
-    return;
   }
 }

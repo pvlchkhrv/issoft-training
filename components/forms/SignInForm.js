@@ -1,6 +1,7 @@
 import { Form } from "./Form.js";
-import { userStorageAdapter } from "../storage/adapters/UserAdapter.js";
-import { modal } from "../modal/Modal.js";
+import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
+import { modal } from "../Modal.js";
+import {handleMessageSpan} from "../../utils/handleMessageSpan.js";
 
 const getTemplate = () => {
   const $form = document.createElement("form");
@@ -14,7 +15,7 @@ const getTemplate = () => {
     <fieldset class="form__fieldset">
       <label class="form__item">
         <span class="form__label">Email</span>
-        <input class="form__input" id="sign-in__email" type="email" placeholder="Enter email" required data-error='Invalid email' data-success='success'> 
+        <input class="form__input" id="sign-in__email" type="email" placeholder="Enter email" required data-error='Invalid email' data-success='success' pattern="^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"> 
         <span class="form__input__message"></span>
       </label>
       <label class="form__item">
@@ -61,25 +62,16 @@ export class SignInForm extends Form {
   checkIsRegistered() {
     const messageSpan = this.$email.nextElementSibling;
     const user = userStorageAdapter.getUser(this.$email.value);
-    if (!user) {
-      messageSpan.style.color = "red";
-      messageSpan.innerText = "User hasn't been registered";
-      return false;
-    }
-    messageSpan.innerText = "";
-    return true;
+    const message = "User hasn't been registered";
+    return handleMessageSpan(!user, messageSpan, message);
   }
 
   checkPassword() {
     const messageSpan = this.$password.nextElementSibling;
     const user = userStorageAdapter.getUser(this.$email.value);
-    if (user.password !== this.$password.value) {
-      messageSpan.style.color = "red";
-      messageSpan.innerText = "Wrong password";
-      return false;
-    }
-    messageSpan.innerText = "";
-    return true;
+    const message = "Wrong password";
+    const condition = user.password !== this.$password.value;
+    return handleMessageSpan(condition, messageSpan, message);
   }
 
   submit(e) {
@@ -87,7 +79,6 @@ export class SignInForm extends Form {
     const $authResult = document.querySelector(".auth-result");
     const $authButtons = document.querySelector(".auth-buttons");
     const modalButtons = document.querySelectorAll(".open-modal");
-
     if (this.checkIsRegistered() && this.checkPassword()) {
       const $logoutButton = getLogoutButton();
       $authResult.style.color = "black";
