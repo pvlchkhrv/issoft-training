@@ -1,7 +1,7 @@
 import { Component } from "./Component.js";
 import { header } from "./Header.js";
 import { footer } from "./Footer.js";
-import { authPage } from "../pages/AuthPage.js";
+import { AuthPage } from "../pages/AuthPage.js";
 import { UsersPage } from "../pages/UsersPage.js";
 
 const getTemplate = () => {
@@ -18,6 +18,6 @@ export class Container extends Component {
   }
 }
 
-const children = [header.html, new UsersPage().html, footer.html];
+const children = [header.html, footer.html];
 
 export const container = new Container({}, children);

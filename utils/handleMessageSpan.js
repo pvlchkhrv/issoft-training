@@ -6,4 +6,4 @@ export const handleMessageSpan = (condition, messageSpan, message) => {
   }
   messageSpan.innerText = "";
   return true;
-}
+};

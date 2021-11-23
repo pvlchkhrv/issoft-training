@@ -4,7 +4,6 @@ import { Form } from "./Form.js";
 import { ChangePasswordForm } from "./ChangePasswordForm.js";
 
 const getTemplate = (user) => {
-  debugger;
   const $form = document.createElement("form");
   $form.classList.add("form", "edit-user-form", "hidden");
   $form.id = "edit-user-form";
@@ -58,7 +57,6 @@ const getTemplate = (user) => {
 
 export class EditUserForm extends Form {
   constructor(props) {
-    debugger;
     super(props);
     this.user = props.user;
     this.updatedUser = {

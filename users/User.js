@@ -29,7 +29,6 @@ export class User extends Component {
     this.user = props.user;
     this.$component = getTemplate(props.user);
     this.currentUser = userStorageAdapter.getCurrentUser();
-    console.log(props);
     this.#listen();
   }
 
