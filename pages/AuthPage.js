@@ -7,14 +7,14 @@ const getTemplate = () => {
     "afterbegin",
     `
       <div class="column-1"></div>
-      <div class="column-2"></div>
+      <div class="column-2">Auth</div>
       <div class="column-3"></div>
     `
   );
   return $main;
 };
 
-class AuthPage extends Page {
+export class AuthPage extends Page {
   constructor(props, children) {
     super(props, children);
     this.$component = getTemplate();

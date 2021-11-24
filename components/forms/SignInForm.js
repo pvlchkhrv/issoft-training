@@ -2,6 +2,7 @@ import { Form } from "./Form.js";
 import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
 import { modal } from "../Modal.js";
 import { handleMessageSpan } from "../../utils/handleMessageSpan.js";
+import { router } from "../../index.js";
 
 const getTemplate = () => {
   const $form = document.createElement("form");
@@ -48,12 +49,6 @@ export class SignInForm extends Form {
     super.listen(this.$component);
   }
 
-  #listen() {
-    this.$form.addEventListener("submit", (e) => {
-      this.submit(e);
-    });
-  }
-
   checkIsRegistered(user) {
     const messageSpan = this.$email.nextElementSibling;
     const message = "User hasn't been registered";
@@ -79,6 +74,7 @@ export class SignInForm extends Form {
       $authResult.innerText = this.$email.value;
       $authButtons.append($logoutButton);
       modalButtons.forEach((button) => button.remove());
+      router.load("/users");
       modal.close();
     }
   }

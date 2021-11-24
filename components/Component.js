@@ -16,6 +16,11 @@ export class Component {
       });
   }
 
+  update() {
+    this.$component.remove();
+    this.$component.mount();
+  }
+
   destroy() {
     this.$component.remove();
   }

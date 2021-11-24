@@ -38,6 +38,9 @@ export class Header extends Component {
           const signUpForm = new SignUpForm();
           modal.open(signUpForm.html);
           break;
+        case "logout-button":
+          this.$component = getTemplate(props.title);
+          window.history.back();
         default:
           return;
       }
@@ -45,6 +48,6 @@ export class Header extends Component {
   }
 }
 
-const props = { title: "ISSoft" };
+const props = { title: "ISSoft", isAuth: false };
 
 export const header = new Header(props);
