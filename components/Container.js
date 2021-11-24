@@ -1,8 +1,6 @@
 import { Component } from "./Component.js";
 import { header } from "./Header.js";
 import { footer } from "./Footer.js";
-import { AuthPage } from "../pages/AuthPage.js";
-import { UsersPage } from "../pages/UsersPage.js";
 
 const getTemplate = () => {
   const $container = document.createElement("div");
