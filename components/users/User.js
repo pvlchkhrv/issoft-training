@@ -1,7 +1,7 @@
-import { userStorageAdapter } from "../storage/adapters/UserAdapter.js";
-import { modal } from "../components/Modal.js";
-import { EditUserForm } from "../components/forms/EditUserForm.js";
-import { Component } from "../components/Component.js";
+import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
+import { modal } from "../modal/Modal.js";
+import { EditUserForm } from "../forms/EditUserForm.js";
+import { Component } from "../Component.js";
 
 const getTemplate = (user) => {
   const $user = document.createElement("tr");

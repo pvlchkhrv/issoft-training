@@ -1,4 +1,4 @@
-import { Component } from "./Component.js";
+import { Component } from "../Component.js";
 
 const getTemplate = () => {
   const $modal = document.createElement("div");
@@ -37,7 +37,7 @@ class Modal extends Component {
     setTimeout(() => {
       this.$component.classList.add("active");
       this.$component.firstElementChild.classList.add("active");
-    }, 100)
+    }, 100);
     this.#listen();
   }
 

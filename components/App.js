@@ -1,4 +1,3 @@
-// import { router } from "./router/Router.js";
 export class App {
   constructor() {
     this.$app = document.querySelector("#app");

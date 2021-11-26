@@ -1,7 +1,7 @@
-import { Component } from "./Component.js";
-import { modal } from "./Modal.js";
-import { SignUpForm } from "./forms/SignUpForm.js";
-import { SignInForm } from "./forms/SignInForm.js";
+import { Component } from "../Component.js";
+import { modal } from "../modal/Modal.js";
+import { SignUpForm } from "../forms/SignUpForm.js";
+import { SignInForm } from "../forms/SignInForm.js";
 
 const getTemplate = (title) => {
   const $header = document.createElement("header");

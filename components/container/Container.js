@@ -1,6 +1,6 @@
-import { Component } from "./Component.js";
-import { header } from "./Header.js";
-import { footer } from "./Footer.js";
+import { Component } from "../Component.js";
+import { header } from "../header/Header.js";
+import { footer } from "../footer/Footer.js";
 
 const getTemplate = () => {
   const $container = document.createElement("div");
