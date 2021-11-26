@@ -1,6 +1,6 @@
-import { userStorageAdapter } from "../storage/adapters/UserAdapter.js";
+import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
 import { User } from "./User.js";
-import { Component } from "../components/Component.js";
+import { Component } from "../../components/Component.js";
 
 const getTemplate = () => {
   const $users = document.createElement("table");

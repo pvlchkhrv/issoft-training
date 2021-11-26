@@ -1,5 +1,5 @@
-import { App } from "./App.js";
-import { container } from "./components/Container.js";
+import { App } from "./components/App.js";
+import { container } from "./components/container/Container.js";
 import { Router } from "./router/Router.js";
 import { routes } from "./router/routes.js";
 

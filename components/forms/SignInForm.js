@@ -1,6 +1,6 @@
 import { Form } from "./Form.js";
 import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
-import { modal } from "../Modal.js";
+import { modal } from "../modal/Modal.js";
 import { handleMessageSpan } from "../../utils/handleMessageSpan.js";
 import { router } from "../../index.js";
 

@@ -1,4 +1,4 @@
-import { Users } from "../users/Users.js";
+import { Users } from "../components/users/Users.js";
 import { Page } from "./Page.js";
 
 const getTemplate = () => {

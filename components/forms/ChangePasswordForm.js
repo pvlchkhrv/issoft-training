@@ -1,4 +1,4 @@
-import { modal } from "../Modal.js";
+import { modal } from "../modal/Modal.js";
 import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
 import { Form } from "./Form.js";
 import { handleMessageSpan } from "../../utils/handleMessageSpan.js";
