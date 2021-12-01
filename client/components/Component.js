@@ -9,6 +9,19 @@ export class Component {
     return this.$component;
   }
 
+  createElement(tag, classes = [], content) {
+    const node = document.createElement(tag);
+    if (classes.length) {
+      node.classList.add(...classes);
+    }
+
+    if (content) {
+      node.textContent = content;
+    }
+
+    return node;
+  }
+
   renderChildren() {
     this.children &&
       this.children.forEach((child) => {
@@ -18,7 +31,6 @@ export class Component {
 
   update() {
     this.$component.remove();
-    this.$component.mount();
   }
 
   destroy() {

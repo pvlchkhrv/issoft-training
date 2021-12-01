@@ -1,5 +1,4 @@
 import Router from 'express';
-
 const router = new Router;
 
 router.get('/', (req, res) => {
@@ -9,11 +8,12 @@ router.get('/', (req, res) => {
     res.status(500).json(e);
   }
 })
-router.post('/', (req, res) => {
+router.post('/images', (req, res) => {
   try {
     console.log(req.files);
-    res.status(200).json('Сервер ок!');
-
+    if(req.files) {
+      res.status(200).json('File uploaded');
+    }
   } catch (e) {
     res.status(500).json(e);
   }

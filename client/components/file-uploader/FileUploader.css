@@ -1,0 +1,66 @@
+input[type=file] {
+    display: none;
+}
+
+button[id=file-upload-button] {
+    display: none;
+}
+
+.preview {
+    display: flex;
+    flex-wrap: wrap;
+    padding: .5rem;
+    justify-content: center;
+}
+
+.preview__image {
+    margin-bottom: .5rem;
+    margin-right: .5rem;
+    position: relative;
+    overflow: hidden;
+    width: 200px;
+}
+
+.preview__image:hover .preview__image-remove {
+    opacity: 1;
+}
+
+.preview__image:hover .preview__info {
+    bottom: 4px;
+}
+
+.preview__image img {
+    width: 100%;
+    height: auto;
+}
+
+.preview__image-remove {
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-weight: bold;
+    background: rgba(255, 255, 255, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 22ms;
+}
+
+.preview__info {
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+    left: 0;
+    height: 24px;
+    font-size: .7rem;
+    background: rgba(255, 255, 255, .5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    transition: bottom 22ms;
+}
