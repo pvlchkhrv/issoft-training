@@ -26,7 +26,6 @@ export class UserAdapter {
     if (user) {
       return user;
     }
-    return;
   }
 
   updateUser(email, updatedUser) {
