@@ -1,4 +1,4 @@
-import { Component } from "../Component.js";
+import {Component} from "../Component.js";
 
 export class Form extends Component {
   constructor(props, children) {
@@ -19,6 +19,16 @@ export class Form extends Component {
 
   getInputs(form) {
     return Array.from(form).filter((child) => child.tagName === "INPUT");
+  }
+
+  getFormData(form) {
+    const inputs = this.getInputs(form);
+    const formData = new FormData();
+    inputs.forEach((input) => {
+      if (input.name === 'confirmation') return;
+      formData.append(input.name, input.value);
+    });
+    return formData;
   }
 
   validate(form) {

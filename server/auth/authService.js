@@ -10,7 +10,14 @@ export const authService = {
       throw new Error('User has been already registered!');
     }
     const hashPassword = bcrypt.hashSync(password, 5);
-    const user = new User({email, password: hashPassword});
+    const user = new User({
+      email,
+      password: hashPassword,
+      birthDate: null,
+      name: null,
+      sex: null,
+      isSmoker: null
+    });
     await user.save();
   },
 
@@ -23,9 +30,10 @@ export const authService = {
     if (!isValidPassword) {
       throw new Error('Wrong password');
     }
+    return await this.generateAccessToken(user._id)
   },
 
-  async generateAccessToken(userId) {
+  generateAccessToken(userId) {
     const payload = {
       userId
     }
