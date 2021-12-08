@@ -23,14 +23,17 @@ export const authService = {
 
   async login(email, password) {
     const user = await User.findOne({email});
+    console.log('user from db: ', user)
     if (!user) {
       throw new Error(`No user with email: ${email}`);
     }
     const isValidPassword = bcrypt.compareSync(password, user.password);
+    console.log('isValidPass: ', isValidPassword)
     if (!isValidPassword) {
       throw new Error('Wrong password');
     }
-    return await this.generateAccessToken(user._id)
+    const token = await this.generateAccessToken(user._id);
+    return {user, token};
   },
 
   generateAccessToken(userId) {

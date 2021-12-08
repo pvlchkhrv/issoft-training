@@ -66,8 +66,8 @@ export class SignUpForm extends Form {
     if (this.validatePasswordConfirmation()) {
       const formData = this.getFormData(this.$component);
       try {
-        const message = await authAPI.register(formData);
-        console.log(message)
+        const data = await authAPI.register(formData);
+        console.log(data);
       } catch (e) {
         console.log(e.message);
       }

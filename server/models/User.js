@@ -7,7 +7,7 @@ const User = new Schema({
   name: {type: String},
   sex: {type: String},
   isSmoker: {type: Boolean},
-  birthDate: {type: Date}
+  birthDate: {type: String}
 });
 
 

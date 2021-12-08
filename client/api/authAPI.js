@@ -1,20 +1,16 @@
 import {makeRequest} from "./makeRequest.js";
+import {handleResponse} from "./handleResponse.js";
+
 
 export const authAPI = {
-  async register(formData) {
-    const response = await makeRequest('POST', '/auth/registration', formData);
-    if (!response) {
-      throw new Error('Something wrong!');
-    }
-    const {message} = await response.json();
+  async register(data) {
+    const response = await makeRequest({uri: '/auth/registration', method: 'POST', data});
+    const {message} = await handleResponse(response);
     return message;
   },
-  async login(formData) {
-    const response = await makeRequest('POST', 'auth/login');
-    if (!response) {
-      throw new Error('Something wrong!');
-    }
-    const {message} = await response.json();
-    return message;
+  async login(data) {
+    const response = await makeRequest({uri: '/auth/login', method: 'POST', data});
+    const {token, user} = await handleResponse(response);
+    return {token, user};
   }
-}
+};

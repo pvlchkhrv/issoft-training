@@ -10,9 +10,6 @@ export class Footer extends Component {
     this.$component = getTemplate();
   }
 
-  render() {
-    super.render();
-  }
 }
 
 export const footer = new Footer();

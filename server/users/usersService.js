@@ -8,18 +8,26 @@ export const usersService = {
     }
     return users;
   },
-  async getUser(userId) {
-     const user = await User.findById({_id: userId});
+  async getUser(_id) {
+     const user = await User.findById({_id});
      if (!user) {
        throw new Error('No user has been found!');
      }
      return user;
   },
-  async updateUser(userId, updatedUser) {
-     const res = await User.replaceOne({_id: userId}, updatedUser);
+  async updateUser(updatedUser) {
+     const _id = updatedUser._id
+     const res = await User.replaceOne({_id}, updatedUser);
      if (!res.acknowledged) {
        throw new Error ('User modification went wrong!')
      }
      return {message: 'User successfully modified!'}
+  },
+  async deleteUser(_id) {
+     const res = await User.deleteOne({_id});
+    if (res.deletedCount === 0) {
+      throw new Error ('User deletion went wrong!')
+    }
+    return {message: 'User successfully deleted!'}
   }
 };

@@ -1,7 +1,7 @@
 import { modal } from "../modal/Modal.js";
-import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
 import { Form } from "./Form.js";
 import { ChangePasswordForm } from "./ChangePasswordForm.js";
+import {usersAPI} from "../../api/usersAPI.js";
 
 const getTemplate = (user) => {
   const $form = document.createElement("form");
@@ -22,15 +22,13 @@ const getTemplate = (user) => {
         <label class="form__item">
         <span class="form__label">Date of birth</span>
         <input class="form__input" id="edit-user-form__date-of-birth" type="date" name="date" value=${
-          user.dateOfBirth || ""
+          user.birthDate || ""
         } >
         <span class="form__input__message"></span>
       </label>
       <label class="form__item">
         <span class="form__label">Sex</span>
-        <select class="form__input" id="edit-user-form__sex" required form="edit-user-form" name="sex" value=${
-          user.sex
-        } >
+        <select class="form__input" id="edit-user-form__sex" required form="edit-user-form" name="sex" >
           <option value="male">Male</option>
             <option value="female">Female</option>
         </select>
@@ -62,6 +60,7 @@ export class EditUserForm extends Form {
     this.updatedUser = {
       ...this.user,
     };
+
     this.$component = getTemplate(this.user);
     this.#listen();
   }
@@ -96,7 +95,7 @@ export class EditUserForm extends Form {
           this.updatedUser.name = input.value;
           break;
         case "date":
-          this.updatedUser.dateOfBirth = input.value;
+          this.updatedUser.birthDate = input.value;
           break;
         case "sex":
           this.updatedUser.sex = input.options[input.selectedIndex].value;
@@ -110,10 +109,14 @@ export class EditUserForm extends Form {
     });
   }
 
-  submit(e) {
+  async submit(e) {
     super.submit(e);
-    this.updateUserInfo();
-    userStorageAdapter.updateUser(this.user.email, this.updatedUser);
-    modal.close();
+    try {
+      this.updateUserInfo();
+      await usersAPI.updateUser(this.updatedUser);
+      modal.close();
+    } catch (e) {
+      console.log(e.message);
+    }
   }
 }

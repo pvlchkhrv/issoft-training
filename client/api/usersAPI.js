@@ -1,16 +1,25 @@
 import {makeRequest} from "./makeRequest.js";
+import {handleResponse} from "./handleResponse.js";
 
 export const usersAPI = {
   async getUsers() {
-    return await makeRequest('POST', '/users');
+    const response = await makeRequest({uri: '/users', method: 'GET', auth: true});
+    const users = await handleResponse(response);
+    return users;
   },
   async getUser(userId) {
-    return await makeRequest('POST', `/users?id=${userId}`);
+    const response = await makeRequest({uri: `/users?_id=${userId}`, method: 'GET', auth: true});
+    const user = await handleResponse(response);
+    return user;
   },
-  async updateUser(userId, payload) {
-    return await makeRequest('PUT', '/users');
+  async updateUser(payload) {
+    const response = await makeRequest({uri: '/users', method: 'PUT', data: JSON.stringify(payload), auth: true});
+    const message = await handleResponse(response);
+    return message
   },
-  async deleteUser(userId) {
-    return await makeRequest('DELETE', '/users');
+  async deleteUser(payload) {
+    const response = await makeRequest({uri: '/users', method: 'DELETE', data: JSON.stringify(payload), auth: true});
+    const message = await handleResponse(response);
+    return message;
   }
 }

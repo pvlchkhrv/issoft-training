@@ -1,4 +1,3 @@
-import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
 import { User } from "./User.js";
 import { Component } from "../Component.js";
 
@@ -25,14 +24,15 @@ export class Users extends Component {
   constructor(props) {
     super(props);
     this.$component = getTemplate();
-    this.users = userStorageAdapter.getUsers();
-    this.render();
+    this.users = props.users || [];
+    this.renderChildren();
   }
 
-  render() {
-    for (let email in this.users) {
-      const $user = new User({ user: this.users[email] }).html;
+  renderChildren() {
+    console.log(this.users)
+    this.users.forEach(user => {
+      const $user = new User({ user }).html;
       this.$component.append($user);
-    }
+    });
   }
 }
