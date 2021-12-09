@@ -52,18 +52,18 @@ export class SignInForm extends Form {
     super.listen(this.$component);
   }
 
-  checkIsRegistered(user) {
-    const messageSpan = this.$email.nextElementSibling;
-    const message = "User hasn't been registered";
-    return handleMessageSpan(!user, messageSpan, message);
-  }
-
-  checkPassword(user) {
-    const messageSpan = this.$password.nextElementSibling;
-    const message = "Wrong password";
-    const condition = user.password !== this.$password.value;
-    return handleMessageSpan(condition, messageSpan, message);
-  }
+  // checkIsRegistered(user) {
+  //   const messageSpan = this.$email.nextElementSibling;
+  //   const message = "User hasn't been registered";
+  //   return handleMessageSpan(!user, messageSpan, message);
+  // }
+  //
+  // checkPassword(user) {
+  //   const messageSpan = this.$password.nextElementSibling;
+  //   const message = "Wrong password";
+  //   const condition = user.password !== this.$password.value;
+  //   return handleMessageSpan(condition, messageSpan, message);
+  // }
 
   async submit(e) {
     super.submit(e);
@@ -81,7 +81,6 @@ export class SignInForm extends Form {
     //   modal.close();
     // }
     try {
-      debugger
       const formData = this.getFormData(this.$component);
       const {user, token} = await authAPI.login(formData);
       setToken(token);
@@ -91,7 +90,8 @@ export class SignInForm extends Form {
       router.load("/users");
       modal.close();
     } catch (e) {
-      console.log(e);
+      const messageSpan = this.$email.nextElementSibling;
+      handleMessageSpan(false, messageSpan, e.message);
     }
   }
 }

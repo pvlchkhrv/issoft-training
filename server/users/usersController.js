@@ -15,7 +15,6 @@ export const usersController = {
   async getUser(req, res) {
     try {
       const {_id} = req.query;
-      console.log(req.query);
       const user = await usersService.getUser(_id);
       res.status(200).json(user);
     } catch (e) {
@@ -24,10 +23,17 @@ export const usersController = {
   },
   async updateUser(req, res) {
     try {
-      console.log(req.body);
       const updatedUser = req.body;
-      console.log(updatedUser)
       const message = await usersService.updateUser(updatedUser);
+      res.status(200).json(message);
+    } catch (e) {
+      res.status(400).json({message: e.message});
+    }
+  },
+  async updateUserPassword(req, res) {
+    try {
+      const {_id, oldPassword, newPassword} = req.body;
+      const message = await usersService.updateUserPassword(_id, oldPassword, newPassword);
       res.status(200).json(message);
     } catch (e) {
       res.status(400).json({message: e.message});
@@ -36,7 +42,6 @@ export const usersController = {
   async deleteUser(req, res) {
     try {
       const {_id} = req.body;
-      console.log(req.body);
       const message = await usersService.deleteUser(_id);
       res.status(200).json(message);
     } catch (e) {

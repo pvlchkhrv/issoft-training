@@ -15,14 +15,14 @@ const getTemplate = (user) => {
       <label class="form__item">
         <span class="form__label">Name</span>
         <input class="form__input" id="edit-user-form__user-name" type="text" placeholder="Enter name" required name="user-name" value=${
-          user.name || ""
+          user.name || ''
         } > 
         <span class="form__input__message"></span>
       </label>
         <label class="form__item">
         <span class="form__label">Date of birth</span>
         <input class="form__input" id="edit-user-form__date-of-birth" type="date" name="date" value=${
-          user.birthDate || ""
+          user.birthDate || ''
         } >
         <span class="form__input__message"></span>
       </label>
@@ -42,7 +42,7 @@ const getTemplate = (user) => {
     </fieldset>
 
     <div class="form__item">
-        <a href="#" class="form__change-password-link">Change email or password</a> 
+        <a href="#" class="form__change-password-link">Change password</a> 
     </div>
         
     <div class="form__item form__item--actions">
@@ -113,7 +113,8 @@ export class EditUserForm extends Form {
     super.submit(e);
     try {
       this.updateUserInfo();
-      await usersAPI.updateUser(this.updatedUser);
+      const message = await usersAPI.updateUser(this.updatedUser);
+      console.log(message);
       modal.close();
     } catch (e) {
       console.log(e.message);

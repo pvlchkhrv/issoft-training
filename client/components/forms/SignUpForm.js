@@ -57,22 +57,24 @@ export class SignUpForm extends Form {
   validatePasswordConfirmation() {
     const messageSpan = this.$passwordConfirmation.nextElementSibling;
     const message = "Confirmation failed";
-    const condition = this.$password.value !== this.$passwordConfirmation.value;
+    const condition = this.$password.value === this.$passwordConfirmation.value;
     return handleMessageSpan(condition, messageSpan, message);
   }
 
   async submit(e) {
     super.submit(e);
+    debugger
     if (this.validatePasswordConfirmation()) {
       const formData = this.getFormData(this.$component);
       try {
-        const data = await authAPI.register(formData);
-        console.log(data);
+        const message = await authAPI.register(formData);
+        console.log(message);
+        this.$component.remove();
+        modal.close();
       } catch (e) {
-        console.log(e.message);
+        const messageSpan = this.$email.nextElementSibling;
+        handleMessageSpan(false, messageSpan, e.message);
       }
     }
-    this.$component.remove();
-    modal.close();
   }
 }

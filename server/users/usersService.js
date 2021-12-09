@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import bcrypt from "bcryptjs";
 
 export const usersService = {
    async getUsers() {
@@ -22,6 +23,17 @@ export const usersService = {
        throw new Error ('User modification went wrong!')
      }
      return {message: 'User successfully modified!'}
+  },
+  async updateUserPassword(_id, oldPassword, newPassword) {
+     const user = await User.findById({_id});
+     const isValidPassword = bcrypt.compareSync(oldPassword, user.password);
+     if (isValidPassword) {
+       user.password = bcrypt.hashSync(newPassword, 5);
+       await user.save();
+       return {message: `User's password successfully modified!`}
+     } else {
+       throw new Error('Wrong password!');
+     }
   },
   async deleteUser(_id) {
      const res = await User.deleteOne({_id});

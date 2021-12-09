@@ -17,6 +17,11 @@ export const usersAPI = {
     const message = await handleResponse(response);
     return message
   },
+  async updateUserPassword(payload) {
+    const response = await makeRequest({uri: '/users', method: 'PATCH', data: JSON.stringify(payload), auth: true});
+    const message = await handleResponse(response);
+    return message;
+  },
   async deleteUser(payload) {
     const response = await makeRequest({uri: '/users', method: 'DELETE', data: JSON.stringify(payload), auth: true});
     const message = await handleResponse(response);
