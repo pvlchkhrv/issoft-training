@@ -70,23 +70,25 @@ export class ChangePasswordForm extends Form {
   }
 
   async updateUserPassword() {
-    const {_id} = this.user;
-    const message = await usersAPI.updateUserPassword({
-      _id,
-      oldPassword: this.$oldPassword.value,
-      newPassword: this.$newPassword.value
-    });
-    console.log(message);
+      const {_id} = this.user;
+      const message = await usersAPI.updateUserPassword({
+        _id,
+        oldPassword: this.$oldPassword.value,
+        newPassword: this.$newPassword.value
+      });
+    return message
   }
 
   async submit(e) {
     e.preventDefault();
     if (this.validatePasswordConfirmation()) {
       try {
-        await this.updateUserPassword();
+        const {message} = await this.updateUserPassword();
+        console.log(message);
         modal.close();
       } catch (e) {
-        console.log(e.message);
+        const messageSpan = this.$oldPassword.nextElementSibling;
+        handleMessageSpan(false, messageSpan, e.message);
       }
     }
   }

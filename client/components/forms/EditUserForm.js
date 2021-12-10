@@ -117,7 +117,7 @@ export class EditUserForm extends Form {
       console.log(message);
       modal.close();
     } catch (e) {
-      console.log(e.message);
+      console.error(e.message);
     }
   }
 }

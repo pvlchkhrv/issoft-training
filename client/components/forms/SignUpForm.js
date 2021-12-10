@@ -63,7 +63,6 @@ export class SignUpForm extends Form {
 
   async submit(e) {
     super.submit(e);
-    debugger
     if (this.validatePasswordConfirmation()) {
       const formData = this.getFormData(this.$component);
       try {

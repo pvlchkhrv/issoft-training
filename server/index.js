@@ -8,7 +8,6 @@ import fileUploader from 'express-fileupload';
 const corsOptions = {
   origin: 'http://127.0.0.1:5500',
   optionsSuccessStatus: 200,
-  // allowedHeaders: "*"
 }
 
 const PORT = process.env.PORT || 5000;
