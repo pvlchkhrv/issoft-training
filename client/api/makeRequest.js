@@ -1,11 +1,23 @@
-const requestUrl = "http://localhost:5000";
-const headers = {
-  'Accept': '*/*'
-}
-export const makeRequest = (method, uri, formData) => {
-  return fetch(requestUrl + uri, {
-    headers,
+import config from "./config.js";
+import {storage} from "../storage/Storage.js";
+let headers = {};
+
+export const makeRequest = ({uri, method, data = null, auth = false, formData = false}) => {
+  const token = storage.getItem('token');
+  if (auth && token) {
+    headers["Content-Type"] = "application/json";
+    headers["Authorization"] = `bearer ${token}`;
+  }
+  if (formData) {
+    return fetch(config.baseUrl + uri, {
+      method,
+      body: data,
+    });
+  }
+
+  return fetch(config.baseUrl + uri, {
     method,
-    body: formData,
+    body: data,
+    headers
   });
 };

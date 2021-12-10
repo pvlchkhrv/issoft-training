@@ -42,6 +42,7 @@ export class AuthPage extends Page {
     });
   }
 
+
   addFileUploader() {
     const $column1 = this.$component.firstElementChild;
     $column1.append(new FileUploader().html);

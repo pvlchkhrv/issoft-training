@@ -1,5 +1,5 @@
 import { authPage } from "../pages/AuthPage.js";
-import { usersPage } from "../pages/UsersPage.js";
+import { UsersPage } from "../pages/UsersPage.js";
 
 export const routes = [
   {
@@ -9,7 +9,7 @@ export const routes = [
   },
   {
     path: "/users",
-    template: usersPage.html,
+    template: new UsersPage().html,
     title: "Users",
   },
 ];

@@ -1,5 +1,5 @@
 export const handleMessageSpan = (condition, messageSpan, message) => {
-  if (condition) {
+  if (!condition) {
     messageSpan.style.color = "red";
     messageSpan.innerText = message;
     return false;

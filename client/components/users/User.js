@@ -1,7 +1,8 @@
-import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
 import { modal } from "../modal/Modal.js";
 import { EditUserForm } from "../forms/EditUserForm.js";
 import { Component } from "../Component.js";
+import {storage} from "../../storage/Storage.js";
+import {usersAPI} from "../../api/usersAPI.js";
 
 const getTemplate = (user) => {
   const $user = document.createElement("tr");
@@ -11,7 +12,7 @@ const getTemplate = (user) => {
     `
       <td id="user__user">${user.email || ""}</td>
       <td id="user__name">${user.name || ""}</td>
-      <td id="user__date-of-birth">${user.dateOfBirth || ""}</td>
+      <td id="user__date-of-birth">${user.birthDate || ""}</td>
       <td id="user__sex">${user.sex || ""}</td>
       <td id="user__isSmoker">${user.isSmoker || ""}</td>
       <td>
@@ -28,7 +29,7 @@ export class User extends Component {
     super(props);
     this.user = props.user;
     this.$component = getTemplate(props.user);
-    this.currentUser = userStorageAdapter.getCurrentUser();
+    this.currentUser = storage.getItem('currentUser');
     this.#listen();
   }
 
@@ -37,7 +38,7 @@ export class User extends Component {
     const $deleteButton = this.$component.lastElementChild.lastElementChild;
     $editButton.addEventListener("click", () => this.onEditClick(this.user));
     $deleteButton.addEventListener("click", () =>
-      this.onDeleteClick(this.user.email)
+      this.onDeleteClick(this.user._id)
     );
   }
 
@@ -46,12 +47,11 @@ export class User extends Component {
     modal.open($editUserForm);
   }
 
-  onDeleteClick(email) {
-    const currentUser = userStorageAdapter.getCurrentUser();
-    if (email === currentUser) {
+  async onDeleteClick(_id) {
+    if (_id === this.currentUser._id) {
       alert("You can not delete yourself");
     } else {
-      userStorageAdapter.deleteUser(email);
+      await usersAPI.deleteUser({_id});
       alert("User has been deleted");
     }
   }

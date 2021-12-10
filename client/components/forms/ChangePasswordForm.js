@@ -1,7 +1,7 @@
-import { modal } from "../modal/Modal.js";
-import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
-import { Form } from "./Form.js";
-import { handleMessageSpan } from "../../utils/handleMessageSpan.js";
+import {modal} from "../modal/Modal.js";
+import {Form} from "./Form.js";
+import {handleMessageSpan} from "../../utils/handleMessageSpan.js";
+import {usersAPI} from "../../api/usersAPI.js";
 
 const getTemplate = (user) => {
   const $form = document.createElement("form");
@@ -54,31 +54,42 @@ export class ChangePasswordForm extends Form {
     super.listen(this.$component);
   }
 
-  checkPassword() {
-    const messageSpan = this.$oldPassword.nextElementSibling;
-    const message = "Wrong old password";
-    const condition = this.user.password !== this.$oldPassword.value;
-    return handleMessageSpan(condition, messageSpan, message);
-  }
+  // checkPassword() {
+  //   const messageSpan = this.$oldPassword.nextElementSibling;
+  //   const message = "Wrong old password";
+  //   const condition = this.user.password !== this.$oldPassword.value;
+  //   return handleMessageSpan(condition, messageSpan, message);
+  // }
 
   validatePasswordConfirmation() {
     const messageSpan = this.$passwordConfirmation.nextElementSibling;
     const message = "Confirmation failed";
     const condition =
-      this.$newPassword.value !== this.$passwordConfirmation.value;
+      this.$newPassword.value === this.$passwordConfirmation.value;
     return handleMessageSpan(condition, messageSpan, message);
   }
 
-  updateUserPassword() {
-    this.updatedUser.password = this.$newPassword.value;
-    userStorageAdapter.updateUser(this.user.email, this.updatedUser);
+  async updateUserPassword() {
+      const {_id} = this.user;
+      const message = await usersAPI.updateUserPassword({
+        _id,
+        oldPassword: this.$oldPassword.value,
+        newPassword: this.$newPassword.value
+      });
+    return message
   }
 
-  submit(e) {
+  async submit(e) {
     e.preventDefault();
-    if (this.checkPassword() && this.validatePasswordConfirmation()) {
-      this.updateUserPassword();
-      modal.close();
+    if (this.validatePasswordConfirmation()) {
+      try {
+        const {message} = await this.updateUserPassword();
+        console.log(message);
+        modal.close();
+      } catch (e) {
+        const messageSpan = this.$oldPassword.nextElementSibling;
+        handleMessageSpan(false, messageSpan, e.message);
+      }
     }
   }
 }

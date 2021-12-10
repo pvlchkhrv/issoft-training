@@ -1,7 +1,7 @@
-import { Form } from "./Form.js";
-import { userStorageAdapter } from "../../storage/adapters/UserAdapter.js";
-import { modal } from "../modal/Modal.js";
-import { handleMessageSpan } from "../../utils/handleMessageSpan.js";
+import {Form} from "./Form.js";
+import {modal} from "../modal/Modal.js";
+import {handleMessageSpan} from "../../utils/handleMessageSpan.js";
+import {authAPI} from "../../api/authAPI.js";
 
 const getTemplate = () => {
   const $form = document.createElement("form");
@@ -15,17 +15,17 @@ const getTemplate = () => {
     <fieldset class="form__fieldset">
       <label class="form__item">
         <span class="form__label">Email</span>
-        <input class="form__input" id="sign-up__email" type="email" placeholder="Enter email" required data-error='Invalid email' pattern="^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"> 
+        <input class="form__input" id="sign-up__email" type="email" name="email" placeholder="Enter email" required data-error='Invalid email' pattern="^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"> 
         <span class="form__input__message"></span>
       </label>
       <label class="form__item">
         <span class="form__label">Password</span>
-        <input class="form__input" id="sign-up__password" type="password" placeholder="Enter password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{4,}$" required data-error='Invalid password'>
+        <input class="form__input" id="sign-up__password" type="password" name="password" placeholder="Enter password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{4,}$" required data-error='Invalid password'>
         <span class="form__input__message"></span>
       </label>
       <label class="form__item">
         <span class="form__label">Confirm password</span>
-        <input class="form__input" id="sign-up__password-confirmation" type="password" placeholder="Confirm password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{4,}$" required data-error='Invalid password confirmation'>
+        <input class="form__input" id="sign-up__password-confirmation" type="password" name="confirmation" placeholder="Confirm password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{4,}$" required data-error='Invalid password confirmation'>
         <span class="form__input__message"></span>
       </label>
     </fieldset>
@@ -47,29 +47,33 @@ export class SignUpForm extends Form {
     super.listen(this.$component);
   }
 
-  checkIsUnique() {
-    const user = userStorageAdapter.getUser(this.$email.value);
-    const messageSpan = this.$email.nextElementSibling;
-    const message = "User has been registered already";
-    return handleMessageSpan(user, messageSpan, message);
-  }
+  // checkIsUnique() {
+  //   const user = userStorageAdapter.getUser(this.$email.value);
+  //   const messageSpan = this.$email.nextElementSibling;
+  //   const message = "User has been registered already";
+  //   return handleMessageSpan(user, messageSpan, message);
+  // }
 
   validatePasswordConfirmation() {
     const messageSpan = this.$passwordConfirmation.nextElementSibling;
     const message = "Confirmation failed";
-    const condition = this.$password.value !== this.$passwordConfirmation.value;
+    const condition = this.$password.value === this.$passwordConfirmation.value;
     return handleMessageSpan(condition, messageSpan, message);
   }
 
-  submit(e) {
+  async submit(e) {
     super.submit(e);
-    if (this.checkIsUnique() && this.validatePasswordConfirmation()) {
-      userStorageAdapter.setUser({
-        email: this.$email.value,
-        password: this.$password.value,
-      });
-      this.$component.remove();
-      modal.close();
+    if (this.validatePasswordConfirmation()) {
+      const formData = this.getFormData(this.$component);
+      try {
+        const message = await authAPI.register(formData);
+        console.log(message);
+        this.$component.remove();
+        modal.close();
+      } catch (e) {
+        const messageSpan = this.$email.nextElementSibling;
+        handleMessageSpan(false, messageSpan, e.message);
+      }
     }
   }
 }
