@@ -1,7 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import authRouter from "./auth/authRouter.js";
-import usersRouter from "./users/usersRouter.js";
+import authRouter from './auth/authRouter.js';
+import usersRouter from './users/usersRouter.js';
+import postsRouter from './posts/postsRouter.js';
 import cors from 'cors';
 import fileUploader from 'express-fileupload';
 
@@ -20,6 +21,7 @@ app.use(fileUploader({}));
 app.use(cors(corsOptions));
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
 
 const start = async () => {
   try {

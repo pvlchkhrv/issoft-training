@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import secret from '../config.js';
+import config from '../config.js';
 
 export default (req, res, next) => {
   if (req.method === 'OPTIONS') {
@@ -10,7 +10,7 @@ export default (req, res, next) => {
     if(!token) {
       return res.status(403).json({message: 'Authorization failed!'});
     }
-    const decoded = jwt.verify(token, secret.key);
+    const decoded = jwt.verify(token, config.key);
     req.user = decoded;
     next();
   } catch (e) {
