@@ -42,8 +42,8 @@ class Modal extends Component {
   }
 
   close() {
-    const form = this.$component.firstElementChild.children[1];
-    form && form.remove();
+    const $form = this.$component.firstElementChild.children[1];
+    $form && $form.remove();
     this.$component.classList.remove("active");
     this.$component.firstElementChild.classList.remove("active");
     this.$component.remove();

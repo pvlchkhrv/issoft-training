@@ -4,6 +4,7 @@ import postsController from "./postsController.js";
 
 const router = new Router();
 
-router.post('/', authMiddleware, postsController.create);
+router.post('/', postsController.create);
+router.get('/', authMiddleware, postsController.getPosts);
 
 export default router;

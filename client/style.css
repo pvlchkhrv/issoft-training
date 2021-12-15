@@ -1,4 +1,5 @@
 @import url(components/file-uploader/FileUploader.css);
+@import url(components/posts/Posts.css);
 
 * {
   margin: 0;

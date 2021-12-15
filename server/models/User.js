@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const { Schema, model } = mongoose;
+const { Schema, model, ObjectId } = mongoose;
 
 const User = new Schema({
   email: {type: String, unique: true, required: true},
@@ -10,7 +10,7 @@ const User = new Schema({
   sex: {type: String},
   isSmoker: {type: Boolean},
   birthDate: {type: String},
-  posts: {type: Array}
+  posts: {type: [ObjectId]}
 });
 
 

@@ -16,7 +16,8 @@ export const authService = {
       birthDate: null,
       name: null,
       sex: null,
-      isSmoker: null
+      isSmoker: null,
+      posts: []
     });
     await user.save();
   },

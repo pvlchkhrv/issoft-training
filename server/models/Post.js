@@ -4,7 +4,7 @@ const { Schema, model, ObjectId } = mongoose;
 
 const Post = new Schema({
   userId: {type: ObjectId, ref: 'User'},
-  title: {type: String, required: true},
+  title: {type: String},
   images: {type: Array},
   text: {type: String},
 });
