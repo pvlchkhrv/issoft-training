@@ -22,7 +22,7 @@ export class Posts extends Component{
       const $post = e.target.closest('.post');
       if ($post) {
         const clone = $post.cloneNode(true);
-        modal.open(clone); // on close deletes !!! fix!
+        modal.open(clone);
       }
     })
   }
