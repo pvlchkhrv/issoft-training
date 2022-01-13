@@ -1,0 +1,31 @@
+.posts {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post {
+    height: 250px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 5px 5px;
+    background: white;
+}
+.post__header {
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post__content {
+    height: 90%;
+    width: 100%;
+}
+
+.post__image > img{
+    height: 200px;
+    width: 100%;
+}

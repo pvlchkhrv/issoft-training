@@ -1,6 +1,8 @@
 import {Form} from "../forms/Form.js";
-import {makeRequest} from "../../api/makeRequest.js";
 import {bytesToSize} from "../../utils/bytesToSize.js";
+import {postsAPI} from "../../api/postsAPI.js";
+import {storage} from "../../storage/Storage.js";
+import {modal} from "../modal/Modal.js";
 
 const getTemplate = () => {
   const $form = document.createElement("form");
@@ -10,7 +12,7 @@ const getTemplate = () => {
   $form.insertAdjacentHTML(
     "afterbegin",
     `
-    <input type="file" id="file-input" multiple accept="image/*">
+    <input type="file" id="file-input" accept="image/*">
     <div class="preview"></div>
     <button class="button" id="file-choose-button">Open file</button>
     <button type="submit" class="button" id="file-upload-button">Send file</button>
@@ -20,9 +22,9 @@ const getTemplate = () => {
 };
 
 export class FileUploader extends Form {
-  constructor(props) {
-    super(props);
-    this.$component = getTemplate(props);
+  constructor() {
+    super();
+    this.$component = getTemplate();
     this.$input = this.$component[0];
     this.files = [];
     this.$preview = this.$input.nextElementSibling;
@@ -31,7 +33,10 @@ export class FileUploader extends Form {
 
   triggerInput() {
     const $chooseFileBtn = this.$input.nextElementSibling.nextElementSibling;
-    $chooseFileBtn.addEventListener('click', () => this.$input.click());
+    $chooseFileBtn.addEventListener('click', (e) =>  {
+      e.preventDefault()
+      this.$input.click()
+    });
   }
 
   removeHandler(e) {
@@ -82,7 +87,6 @@ export class FileUploader extends Form {
   }
 
   #listen() {
-
     this.triggerInput();
     this.$preview.addEventListener('click', (e) => this.removeHandler(e));
     this.$input.addEventListener("change", (e) => this.changeHandler(e));
@@ -95,7 +99,10 @@ export class FileUploader extends Form {
     this.files.forEach(file => {
       formData.append("image", file);
     });
-    const response = await makeRequest("POST", "/images", formData);
-    console.log(response);
+    const {_id} = storage.getItem('currentUser');
+    formData.append('userId', _id);
+    const {message} = await postsAPI.create(formData);
+    console.log(message);
+    modal.close()
   }
 }

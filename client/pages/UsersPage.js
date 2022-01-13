@@ -47,11 +47,11 @@ export class UsersPage extends Page {
     $centerColumn.append(new Users({users: this.users}).html);
   }
 
-  renderChildren() {
+  async renderChildren() {
     const getUsersButton = this.createElement('button', '', 'Get users');
     getUsersButton.id = 'get-user-button';
     const $firstColumn = this.$component.firstElementChild;
     $firstColumn.append(getUsersButton);
-    this.getUsers();
+    await this.getUsers();
   }
 }

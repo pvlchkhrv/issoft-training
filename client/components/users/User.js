@@ -6,7 +6,7 @@ import {usersAPI} from "../../api/usersAPI.js";
 
 const getTemplate = (user) => {
   const $user = document.createElement("tr");
-  $user.id = "user";
+  $user.classList.add = "user";
   $user.insertAdjacentHTML(
     "afterbegin",
     `

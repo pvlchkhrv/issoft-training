@@ -14,7 +14,6 @@ export const makeRequest = ({uri, method, data = null, auth = false, formData = 
       body: data,
     });
   }
-
   return fetch(config.baseUrl + uri, {
     method,
     body: data,
